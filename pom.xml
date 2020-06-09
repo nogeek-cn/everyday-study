@@ -6,6 +6,7 @@
     <modules>
         <module>2018-RPC-customer-RPC</module>
         <module>2019-06-01-jvm</module>
+        <module>come-tips-demo</module>
     </modules>
 
     <groupId>com.darian</groupId>

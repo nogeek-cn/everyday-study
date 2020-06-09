@@ -19,17 +19,22 @@ public class zookeeperUtils {
         if (zk != null) {
 
             zooChildren = zk.getChildren(zpath, false);
-            getChildRen(zk, zpath);
+            System.err.println("/");
+            getChildRen(zk, zpath, 1);
 
         }
     }
 
-    public static void getChildRen(ZooKeeper zk, String zpath) throws Exception {
+    public static void getChildRen(ZooKeeper zk, String zpath, int deep) throws Exception {
         List<String> zooChildren = zk.getChildren(zpath, false);
 
         for (String child : zooChildren) {
-            System.out.println("[path]{" + zpath + "}  [child]{" + child + "}");
-            getChildRen(zk, zpath.endsWith("/") ? zpath + child : zpath + "/" + child);
+            for (int i = 0; i < deep; i++) {
+                System.err.print("  ");
+            }
+            System.err.print("|-");
+            System.err.println(child);
+            getChildRen(zk, zpath.endsWith("/") ? zpath + child : zpath + "/" + child, deep + 1);
         }
     }
 }

@@ -13,7 +13,11 @@ public class RedisUtils {
         Jedis jedis = new Jedis("redis.darian.com", 6379);
         jedis.auth("darian");
         jedis.set("username", "zhangsan");
-        System.out.println(jedis.get("username"));
+
+        System.err.println("jedis.set(\"username\", \"zhangsan\");");
+        System.err.println("jedis.get(\"username\")");
+
+        System.err.println(jedis.get("username"));
         jedis.close();
     }
 }

@@ -14,8 +14,8 @@ public class RedisUtils {
         jedis.auth("darian");
         jedis.set("username", "zhangsan");
 
-        System.err.println("jedis.set(\"username\", \"zhangsan\");");
-        System.err.println("jedis.get(\"username\")");
+        System.err.println("|-- jedis.set(\"username\", \"zhangsan\");");
+        System.err.println("+-- jedis.get(\"username\")");
 
         System.err.println(jedis.get("username"));
         jedis.close();

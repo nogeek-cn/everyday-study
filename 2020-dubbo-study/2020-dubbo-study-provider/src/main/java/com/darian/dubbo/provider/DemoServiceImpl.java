@@ -1,12 +1,14 @@
 package com.darian.dubbo.provider;
 
-import org.apache.dubbo.config.annotation.Service;
 import com.darian.dubbo.DemoService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.rpc.RpcContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Service(version = "1.0.0")
+@DubboService(
+        registry = {"shanghai", "hunan"},
+        protocol = {"dubbo", "rest"})
 public class DemoServiceImpl implements DemoService {
     private static final Logger logger = LoggerFactory.getLogger(DemoServiceImpl.class);
 

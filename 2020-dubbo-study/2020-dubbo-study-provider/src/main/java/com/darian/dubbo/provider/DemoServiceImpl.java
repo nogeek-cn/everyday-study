@@ -7,8 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @DubboService(
-        registry = {"shanghai", "hunan"},
-        protocol = {"dubbo", "rest"})
+        registry = {"shanghai", "hunan"})
 public class DemoServiceImpl implements DemoService {
     private static final Logger logger = LoggerFactory.getLogger(DemoServiceImpl.class);
 

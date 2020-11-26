@@ -1,6 +1,7 @@
 package com.darian.dubbo.consumer;
 
 import com.darian.dubbo.DemoService;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +16,7 @@ public class DubboConsumerBootstrap {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
 
-    @Reference(version = "1.0.0")
-
+    @DubboReference(registry = {"shanghai","hunan"})
     private DemoService demoService;
 
     public static void main(String[] args) {

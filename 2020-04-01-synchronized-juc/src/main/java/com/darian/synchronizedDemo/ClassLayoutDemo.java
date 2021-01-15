@@ -2,13 +2,17 @@ package com.darian.synchronizedDemo;
 
 import org.openjdk.jol.info.ClassLayout;
 
-/**
+
+/***
  * 偏向锁 -> 轻量级锁 -> 重量级锁
  *
  * 打开偏向锁：-XX:+UseBiasedLocking -XX:BiasedLockingStartupDelay=0
  *
  * 偏向锁 默认关闭
  * 计算一次 hashCode() 就没有偏向锁了
+ *
+ * @author <a href="mailto:1934849492@qq.com">Darian</a>
+ * @date 2021/1/15  上午12:45
  */
 public class ClassLayoutDemo {
     public static void main(String[] args) {

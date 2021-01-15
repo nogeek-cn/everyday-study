@@ -13,6 +13,12 @@ import java.util.concurrent.TimeUnit;
 
 import static com.darian.registerAndSms.ThreadUtils.sleepSecond;
 
+/***
+ *
+ *
+ * @author <a href="mailto:1934849492@qq.com">Darian</a>
+ * @date 2021/1/14  下午11:45
+ */
 @RestController
 public class TestController {
 

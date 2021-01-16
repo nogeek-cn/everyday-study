@@ -4,6 +4,9 @@ public class ThreadLocalHashDemo {
 
     private static final int HASH_INCREMENT = 0x61c88647;
 
+    /**
+     * 随便选择一个数，也同样的算法也能不 Hash 冲突，但是没有 魔数 更加离散
+     */
     private static final int MY_HASH_INCREMENT = 5;
 
     public static void main(String[] args) {

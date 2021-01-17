@@ -1,9 +1,10 @@
-package com.darian.registerAndSms;
+package com.darian.registerAndSms.threadpool;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -11,7 +12,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import static com.darian.registerAndSms.ThreadUtils.sleepSecond;
+import static com.darian.registerAndSms.threadpool.ThreadUtils.sleepSecond;
 
 /***
  *
@@ -20,7 +21,8 @@ import static com.darian.registerAndSms.ThreadUtils.sleepSecond;
  * @date 2021/1/14  下午11:45
  */
 @RestController
-public class TestController {
+@RequestMapping("/threadPool/")
+public class ThreadPoolController {
 
     @Resource
     private UserService userService;
@@ -44,14 +46,14 @@ public class TestController {
     /**
 
      ###
-     GET http://localhost:8080/asyncRegister
+     GET http://localhost:8080/threadPool/asyncRegister
 
      {
      "cost": 1004
      }
 
      ###
-     GET http://localhost:8080/syncRegister
+     GET http://localhost:8080/threadPool/syncRegister
 
      {
      "cost": 3021

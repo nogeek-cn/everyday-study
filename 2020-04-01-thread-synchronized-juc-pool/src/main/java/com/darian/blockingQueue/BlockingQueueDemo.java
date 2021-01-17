@@ -1,4 +1,4 @@
-package com.darian;
+package com.darian.blockingQueue;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -11,6 +11,9 @@ import java.util.concurrent.LinkedBlockingDeque;
  */
 public class BlockingQueueDemo {
 
+    /**
+     * max_size = Integer.Max_value
+     */
     static BlockingQueue<String> stringBlockingQueue = new LinkedBlockingDeque<>();
 
     public static void main(String[] args) {

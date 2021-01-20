@@ -35,9 +35,11 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 /***
- * http://localhost:8080/login/checkNewLoginStatus
- * http://localhost:8080/login/loginInto
- * http://localhost:8080/login/checkCurrentLoginStatus
+ * 1. http://localhost:8080/login/checkNewLoginStatus
+ * 2. http://localhost:8080/login/loginInto
+ *
+ * 3. loginInto -> { msg: "success",  dataBody: "这里告诉第三方：已经收到第三方成功登录的消息：登录成功" }
+ * 4. checkNewLoginStatus -> { msg: "SUCCESS",  dataBody: "第三方通知本服务：登录成功" }
  *
  * @author <a href="mailto:1934849492@qq.com">Darian</a>
  * @date 2021/1/17  上午2:35

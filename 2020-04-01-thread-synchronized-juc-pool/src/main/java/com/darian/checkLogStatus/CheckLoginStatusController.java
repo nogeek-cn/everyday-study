@@ -97,7 +97,7 @@ public class CheckLoginStatusController {
         loginStatusChangeEvent.setChangeStatus(changeStatus);
         LoginStatusRepository.USER_ID_STATUS_MYSQL_DATABASE_MAP.put(currentUUIdString, changeStatus);
         applicationContext.publishEvent(loginStatusChangeEvent);
-        return new ResponseBody("success", "登陆成功");
+        return new ResponseBody("success", "这里告诉第三方：已经收到第三方成功登录的消息：登录成功");
     }
 }
 

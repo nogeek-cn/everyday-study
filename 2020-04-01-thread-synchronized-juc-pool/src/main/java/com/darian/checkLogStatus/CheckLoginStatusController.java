@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -40,6 +41,9 @@ import java.util.concurrent.TimeUnit;
  *
  * 3. loginInto -> { msg: "success",  dataBody: "这里告诉第三方：已经收到第三方成功登录的消息：登录成功" }
  * 4. checkNewLoginStatus -> { msg: "SUCCESS",  dataBody: "第三方通知本服务：登录成功" }
+ *
+ * <p>测试类</p>
+ * @see  {@link CheckLogStatusTest}
  *
  * @author <a href="mailto:1934849492@qq.com">Darian</a>
  * @date 2021/1/17  上午2:35
@@ -75,8 +79,11 @@ public class CheckLoginStatusController {
      * @param request
      */
     @GetMapping("/checkNewLoginStatus")
-    public void checkNewLoginStatus(HttpServletRequest request) {
-        String uuidString = UUID.randomUUID().toString().replace("-", "");
+    public void checkNewLoginStatus(HttpServletRequest request,
+                                    @RequestParam(required = false) String uuidString) {
+        if (uuidString == null || uuidString.length() == 0) {
+            uuidString = UUID.randomUUID().toString().replace("-", "");
+        }
         currentUUIdString = uuidString;
         LOGGER.info(String.format("用户[%s]检查状态。。。", currentUUIdString));
         longPollingCheckLoginStatusService.addLongPollingClient(request, currentUUIdString);
@@ -89,7 +96,10 @@ public class CheckLoginStatusController {
      * @return
      */
     @GetMapping("/loginInto")
-    public ResponseBody loginInto() {
+    public ResponseBody loginInto(@RequestParam(required = false) String uuidString) {
+        if (uuidString == null || uuidString.length() == 0) {
+            currentUUIdString = uuidString;
+        }
         LOGGER.info(String.format("用户[%s]登陆成功。。。", currentUUIdString));
 
         String changeStatus = "第三方通知本服务：登录成功";

@@ -1,0 +1,2 @@
+random=com.darian.dubbo.spi.InterNalNamingVSCustomerDubboSPI.MyRandomLoadBalance
+darianrandom=com.darian.dubbo.spi.naming.customer.DarianRandomLoadBalance

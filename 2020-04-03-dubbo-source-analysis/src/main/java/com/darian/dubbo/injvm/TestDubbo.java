@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestDubbo {
 
-    @DubboReference(
-            parameters = {"scope", "local"}
-            //, protocol = InjvmProtocol.NAME
-    )
+    /**
+     * @DubboReference(parameters = {"scope", "local"})
+     * <p></p>
+     * @DubboReference(protocol = InjvmProtocol.NAME) 推荐使用这个
+     * 这两个都可以 实现 本地调用
+     */
+    @DubboReference(protocol = InjvmProtocol.NAME)
     public TestInterface testInterface;
 
     public void say() {

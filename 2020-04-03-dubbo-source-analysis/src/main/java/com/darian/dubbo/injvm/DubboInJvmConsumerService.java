@@ -17,7 +17,7 @@ public class DubboInJvmConsumerService {
     @DubboReference(protocol = InjvmProtocol.NAME)
     public DubboInJvmInterface dubboInJvmInterface;
 
-    public void say() {
-        System.out.println(dubboInJvmInterface.say());
+    public String say() {
+        return dubboInJvmInterface.say();
     }
 }

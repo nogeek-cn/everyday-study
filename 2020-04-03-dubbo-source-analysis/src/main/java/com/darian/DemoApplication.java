@@ -14,6 +14,9 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 
 import javax.annotation.Resource;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @EnableDubbo
 @SpringBootApplication
@@ -23,10 +26,16 @@ public class DemoApplication implements InitializingBean {
 
     private static Logger LOGGER = LoggerFactory.getLogger(DemoApplication.class);
 
+    static ScheduledExecutorService SCHEDULE = new ScheduledThreadPoolExecutor(1);
+
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(DemoApplication.class, args);
-        DubboInJvmConsumerService bean = run.getBean(DubboInJvmConsumerService.class);
-        bean.say();
+
+        SCHEDULE.scheduleAtFixedRate(() -> {
+            DubboInJvmConsumerService bean = run.getBean(DubboInJvmConsumerService.class);
+            LOGGER.info(bean.say());
+        }, 0, 5, TimeUnit.SECONDS);
+
     }
 
     @Value("${project.user.name}")

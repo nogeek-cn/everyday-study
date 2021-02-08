@@ -16,6 +16,6 @@ public class DubboInJvmProviderService implements DubboInJvmInterface {
 
     @Override
     public String say() {
-        return "com.darian.LocalService.say";
+        return "com.darian.dubbo.injvm.DubboInJvmProviderService.say";
     }
 }

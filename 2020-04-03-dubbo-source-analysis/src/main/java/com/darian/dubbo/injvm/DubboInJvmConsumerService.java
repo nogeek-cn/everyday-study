@@ -6,7 +6,7 @@ import org.apache.dubbo.rpc.protocol.injvm.InjvmProtocol;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TestDubbo {
+public class DubboInJvmConsumerService {
 
     /**
      * @DubboReference(parameters = {"scope", "local"})
@@ -15,9 +15,9 @@ public class TestDubbo {
      * 这两个都可以 实现 本地调用
      */
     @DubboReference(protocol = InjvmProtocol.NAME)
-    public TestInterface testInterface;
+    public DubboInJvmInterface dubboInJvmInterface;
 
     public void say() {
-        System.out.println(testInterface.say());
+        System.out.println(dubboInJvmInterface.say());
     }
 }

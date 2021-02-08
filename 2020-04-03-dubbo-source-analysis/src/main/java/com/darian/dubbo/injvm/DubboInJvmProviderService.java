@@ -12,7 +12,7 @@ import org.apache.dubbo.rpc.protocol.injvm.InjvmProtocol;
  */
 //@DubboService(parameters = {"scope", "local"})
 @DubboService(protocol = InjvmProtocol.NAME)
-public class LocalService implements TestInterface {
+public class DubboInJvmProviderService implements DubboInJvmInterface {
 
     @Override
     public String say() {

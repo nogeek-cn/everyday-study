@@ -1,6 +1,6 @@
 package com.darian;
 
-import com.darian.dubbo.injvm.TestDubbo;
+import com.darian.dubbo.injvm.DubboInJvmConsumerService;
 import lombok.Data;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ public class DemoApplication implements InitializingBean {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(DemoApplication.class, args);
-        TestDubbo bean = run.getBean(TestDubbo.class);
+        DubboInJvmConsumerService bean = run.getBean(DubboInJvmConsumerService.class);
         bean.say();
     }
 

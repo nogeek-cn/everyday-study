@@ -1,6 +1,9 @@
 package com.darian;
 
 import com.darian.dubbo.injvm.DubboInJvmConsumerService;
+import com.darian.dubbo.registries.DubboRegistriesConsumerService;
+import com.darian.dubbo.remote.DubboRemoteConsumerService;
+import com.darian.dubbo.remote.DubboRemoteProviderService;
 import lombok.Data;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.slf4j.Logger;
@@ -14,6 +17,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -32,10 +36,36 @@ public class DemoApplication implements InitializingBean {
         ConfigurableApplicationContext run = SpringApplication.run(DemoApplication.class, args);
 
         SCHEDULE.scheduleAtFixedRate(() -> {
-            DubboInJvmConsumerService bean = run.getBean(DubboInJvmConsumerService.class);
-            LOGGER.info(bean.say());
+            try {
+                DubboInJvmConsumerService dubboInJvmConsumerService = getBean(run, DubboInJvmConsumerService.class);
+
+                if (Objects.nonNull(dubboInJvmConsumerService)) {
+                    LOGGER.info(dubboInJvmConsumerService.say());
+                }
+
+                DubboRemoteConsumerService dubboRemoteConsumerService = getBean(run, DubboRemoteConsumerService.class);
+                if (Objects.nonNull(dubboRemoteConsumerService)) {
+                    LOGGER.info(dubboRemoteConsumerService.say());
+                }
+
+                DubboRegistriesConsumerService dubboRegistriesConsumerService = getBean(run, DubboRegistriesConsumerService.class);
+                if (Objects.nonNull(dubboRegistriesConsumerService)) {
+                    LOGGER.info(dubboRegistriesConsumerService.say());
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }, 0, 5, TimeUnit.SECONDS);
 
+    }
+
+    private static <T> T getBean(ConfigurableApplicationContext applicationContext, Class<T> tClazz) {
+        try {
+            return applicationContext.getBean(tClazz);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Value("${project.user.name}")

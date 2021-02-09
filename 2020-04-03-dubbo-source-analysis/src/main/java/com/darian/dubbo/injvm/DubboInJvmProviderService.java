@@ -3,6 +3,7 @@ package com.darian.dubbo.injvm;
 
 import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.rpc.protocol.injvm.InjvmProtocol;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 /**
  * @DubboService(parameters = {"scope", "local"})
@@ -12,6 +13,7 @@ import org.apache.dubbo.rpc.protocol.injvm.InjvmProtocol;
  */
 //@DubboService(parameters = {"scope", "local"})
 @DubboService(protocol = InjvmProtocol.NAME)
+@ConditionalOnProperty(value = "spring.profiles.active", havingValue = "injvm")
 public class DubboInJvmProviderService implements DubboInJvmInterface {
 
     @Override

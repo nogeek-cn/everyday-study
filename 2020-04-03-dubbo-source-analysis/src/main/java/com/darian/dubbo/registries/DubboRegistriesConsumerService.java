@@ -1,12 +1,11 @@
 package com.darian.dubbo.registries;
 
-import com.darian.dubbo.remote.DubboRemoteInterface;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 @Service
-@ConditionalOnProperty(value = "spring.profiles.active", havingValue = "registries")
+@Profile("registries")
 public class DubboRegistriesConsumerService {
 
     @DubboReference(

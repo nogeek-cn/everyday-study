@@ -2,16 +2,14 @@
 package com.darian.dubbo.remote;
 
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 @DubboService
-@ConditionalOnProperty(value = "spring.profiles.active", havingValue = "remote")
+@Profile("remote")
 @ConditionalOnMissingClass("com.darian.dubbo.remote.MockService")
 public class DubboRemoteProviderService implements DubboRemoteInterface {
 

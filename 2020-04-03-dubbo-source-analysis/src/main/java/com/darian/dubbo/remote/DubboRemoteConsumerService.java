@@ -6,12 +6,12 @@ import org.apache.dubbo.config.annotation.Method;
 import org.apache.dubbo.rpc.cluster.loadbalance.RandomLoadBalance;
 import org.apache.dubbo.rpc.cluster.support.FailfastCluster;
 import org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 
 @Service
-@ConditionalOnProperty(value = "spring.profiles.active", havingValue = "remote")
+@Profile("remote")
 public class DubboRemoteConsumerService {
 
     @DubboReference(

@@ -2,14 +2,14 @@
 package com.darian.dubbo.registries;
 
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Profile;
 
 @DubboService(
         registry = {
                 "nacos", "zookeeper"
         }
 )
-@ConditionalOnProperty(value = "spring.profiles.active", havingValue = "registries")
+@Profile("registries")
 public class DubboRegistriesProviderService implements DubboRegistriesInterface {
 
 }

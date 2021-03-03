@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.darian</groupId>
-    <artifactId>2020-dubbo-study</artifactId>
+    <artifactId>2020-04-03-00-dubbo-study</artifactId>
     <version>0.0.1</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>

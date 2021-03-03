@@ -15,9 +15,4 @@ import org.springframework.context.annotation.Profile;
 @DubboService(protocol = InjvmProtocol.NAME)
 @Profile("injvm")
 public class DubboInJvmProviderService implements DubboInJvmInterface {
-
-    @Override
-    public String say() {
-        return "com.darian.dubbo.injvm.DubboInJvmProviderService.say";
-    }
 }

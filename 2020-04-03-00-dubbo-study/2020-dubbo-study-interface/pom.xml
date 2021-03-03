@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.darian</groupId>
-        <artifactId>2020-dubbo-study</artifactId>
+        <artifactId>2020-04-03-00-dubbo-study</artifactId>
         <version>0.0.1</version>
     </parent>
     <groupId>com.darian</groupId>

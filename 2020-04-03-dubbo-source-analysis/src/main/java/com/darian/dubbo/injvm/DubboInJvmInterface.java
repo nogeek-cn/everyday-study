@@ -2,5 +2,7 @@
 package com.darian.dubbo.injvm;
 
 public interface DubboInJvmInterface {
-    String say();
+    default String say() {
+        return this.getClass().getName() + ".say";
+    }
 }

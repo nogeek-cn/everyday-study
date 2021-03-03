@@ -1,5 +1,5 @@
 
-package com.darian.dubbo.remote;
+package com.darian.dubbo.protocols;
 
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.Method;
@@ -9,16 +9,14 @@ import org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-
 @Service
-@Profile("remote")
-public class DubboRemoteConsumerService {
+@Profile("protocols")
+public class DubboProtocolsRemoteConsumerService {
 
     @DubboReference(
-            interfaceClass = DubboRemoteInterface.class,
+            interfaceClass = DubboProtocolsRemoteInterface.class,
             protocol = DubboProtocol.NAME,
             loadbalance = RandomLoadBalance.NAME,
-            mock = "com.darian.dubbo.remote.MockService",
             timeout = 500,
             cluster = FailfastCluster.NAME,
             check = false,
@@ -28,10 +26,10 @@ public class DubboRemoteConsumerService {
             retries = 2,
             injvm = false
     )
-    private DubboRemoteInterface dubboRemoteInterface;
+    private DubboProtocolsRemoteInterface dubboProtocolsRemoteInterface;
 
     public String say() {
-        return dubboRemoteInterface.say();
+        return dubboProtocolsRemoteInterface.say();
     }
 }
 

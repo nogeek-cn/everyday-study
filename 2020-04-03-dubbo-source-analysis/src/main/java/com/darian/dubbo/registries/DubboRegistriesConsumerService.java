@@ -11,7 +11,8 @@ public class DubboRegistriesConsumerService {
     @DubboReference(
             registry = {
                     "nacos", "zookeeper"
-            }
+            },
+            injvm = false
     )
     private DubboRegistriesInterface dubboRegistriesInterface;
 

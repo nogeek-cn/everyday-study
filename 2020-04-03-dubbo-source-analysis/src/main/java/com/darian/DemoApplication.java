@@ -1,9 +1,10 @@
 package com.darian;
 
 import com.darian.dubbo.injvm.DubboInJvmConsumerService;
+import com.darian.dubbo.onlyconsumer.DubboOnlyConsumerService;
+import com.darian.dubbo.protocols.DubboProtocolsRemoteConsumerService;
 import com.darian.dubbo.registries.DubboRegistriesConsumerService;
 import com.darian.dubbo.remote.DubboRemoteConsumerService;
-import com.darian.dubbo.remote.DubboRemoteProviderService;
 import lombok.Data;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.slf4j.Logger;
@@ -51,6 +52,17 @@ public class DemoApplication implements InitializingBean {
                 DubboRegistriesConsumerService dubboRegistriesConsumerService = getBean(run, DubboRegistriesConsumerService.class);
                 if (Objects.nonNull(dubboRegistriesConsumerService)) {
                     LOGGER.info(dubboRegistriesConsumerService.say());
+                }
+
+                DubboOnlyConsumerService dubboOnlyConsumerService = getBean(run, DubboOnlyConsumerService.class);
+                if (Objects.nonNull(dubboOnlyConsumerService)) {
+                    LOGGER.info(dubboOnlyConsumerService.say());
+                }
+
+                DubboProtocolsRemoteConsumerService dubboProtocolsRemoteConsumerService = getBean(run,
+                        DubboProtocolsRemoteConsumerService.class);
+                if (Objects.nonNull(dubboProtocolsRemoteConsumerService)) {
+                    LOGGER.info(dubboProtocolsRemoteConsumerService.say());
                 }
 
             } catch (Exception e) {

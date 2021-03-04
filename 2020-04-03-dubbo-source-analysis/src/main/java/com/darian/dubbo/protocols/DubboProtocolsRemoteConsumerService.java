@@ -26,10 +26,25 @@ public class DubboProtocolsRemoteConsumerService {
             retries = 2,
             injvm = false
     )
-    private DubboProtocolsRemoteInterface dubboProtocolsRemoteInterface;
+    private DubboProtocolsRemoteInterface dubboProtocolsRemoteInterfaceDubbo;
+
+    @DubboReference(
+            interfaceClass = DubboProtocolsRemoteInterface.class,
+            protocol = "rmi",
+            loadbalance = RandomLoadBalance.NAME,
+            timeout = 500,
+            cluster = FailfastCluster.NAME,
+            check = false,
+            methods = {
+                    @Method(name = "say", loadbalance = RandomLoadBalance.NAME)
+            },
+            retries = 2,
+            injvm = false
+    )
+    private DubboProtocolsRemoteInterface dubboProtocolsRemoteInterfaceRMI;
 
     public String say() {
-        return dubboProtocolsRemoteInterface.say();
+        return "dubbo:" + dubboProtocolsRemoteInterfaceDubbo.say() + "\n rmi:" + dubboProtocolsRemoteInterfaceRMI.say();
     }
 }
 

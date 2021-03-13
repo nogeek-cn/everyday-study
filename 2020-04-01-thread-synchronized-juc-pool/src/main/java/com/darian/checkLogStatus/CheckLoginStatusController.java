@@ -181,6 +181,10 @@ class LongPollingCheckLoginStatusService implements ApplicationListener<LoginSta
         }
 
         public void sendResponse(String userStatus) {
+            if (asyncTimeoutFeature != null) {
+                // 加入不是延后的执行进行的，那么需要把线程给 cancel 掉
+                asyncTimeoutFeature.cancel(false);
+            }
             generateResponse(new ResponseBody("SUCCESS", userStatus));
         }
 

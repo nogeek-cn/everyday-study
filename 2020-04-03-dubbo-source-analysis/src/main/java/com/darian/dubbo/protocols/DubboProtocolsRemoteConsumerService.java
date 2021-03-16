@@ -44,7 +44,8 @@ public class DubboProtocolsRemoteConsumerService {
     private DubboProtocolsRemoteInterface dubboProtocolsRemoteInterfaceRMI;
 
     public String say() {
-        return "dubbo:" + dubboProtocolsRemoteInterfaceDubbo.say() + "\n rmi:" + dubboProtocolsRemoteInterfaceRMI.say();
+        return "\n\t dubbo:-:" + dubboProtocolsRemoteInterfaceDubbo.say()
+                + "\n\t rmi:-:" + dubboProtocolsRemoteInterfaceRMI.say();
     }
 }
 

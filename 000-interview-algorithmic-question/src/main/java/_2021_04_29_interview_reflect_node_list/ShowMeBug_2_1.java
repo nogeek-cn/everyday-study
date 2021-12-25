@@ -1,8 +1,7 @@
-package _2021_04_29_interview;
+package _2021_04_29_interview_reflect_node_list;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 //AA
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
 //        OO
 
 // 必须定义 `ShowMeBug` 入口类和 `public static void main(String[] args)` 入口方法
-public class ShowMeBug_2_2 {
+public class ShowMeBug_2_1 {
     static class Node {
         int id;
         int parentId;
@@ -61,35 +60,37 @@ public class ShowMeBug_2_2 {
             return;
         }
 
-        Map<Integer, List<Node>> integerListMap = groupBy(nodeList);
-
-        printNodeMap(integerListMap, 0, 0);
-
-    }
-
-    public static Map<Integer, List<Node>> groupBy(List<Node> nodeList) {
-        return nodeList.stream()
-                .collect(Collectors.groupingBy(node -> node.parentId));
-    }
-
-    public static void printNodeMap(Map<Integer, List<Node>> integerListMap, int parentId, int frame) {
-        List<Node> nodes = integerListMap.get(parentId);
-        if (nodes == null || nodes.size() == 0) {
+        int parentId = 0;
+        List<Node> childrenNodeList = childrenNodeList(nodeList, parentId);
+        if (childrenNodeList == null || childrenNodeList.size() == 0) {
             return;
         }
-        for (Node node : nodes) {
-            printOneNode(node, integerListMap, frame);
+        for (Node children : childrenNodeList) {
+            printOneNode(children, 0, nodeList);
         }
+
     }
 
-    private static void printOneNode(Node node, Map<Integer, List<Node>> integerListMap, int frame) {
+
+    public static void printOneNode(Node node, int frame, List<Node> nodeList) {
         // 缩进
         for (int i = 0; i < frame; i++) {
             System.out.print("  ");
         }
         // name
         System.out.println(node.name);
-        printNodeMap(integerListMap, node.id, frame + 1);
+
+        List<Node> childrenNodeList = childrenNodeList(nodeList, node.id);
+        for (Node childrenNode : childrenNodeList) {
+            printOneNode(childrenNode, frame + 1, nodeList);
+        }
     }
+
+    public static List<Node> childrenNodeList(List<Node> nodeList, int parentId) {
+        return nodeList.stream()
+                .filter(node -> parentId == node.parentId)
+                .collect(Collectors.toList());
+    }
+
 
 }

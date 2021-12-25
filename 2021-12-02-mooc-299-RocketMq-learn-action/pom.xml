@@ -18,6 +18,8 @@
 
         <!-- <org.apache.rocketmq+rocketmq-all+version>4.4.0</org.apache.rocketmq+rocketmq-all+version> -->
         <rocketmq.boot.version>2.0.2</rocketmq.boot.version>
+
+        <org.apache.rocketmq.rocketmq-all.version>4.4.0</org.apache.rocketmq.rocketmq-all.version>
     </properties>
 
     <dependencies>
@@ -46,6 +48,98 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+
+        <!--  RocketMQ-source      -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.rocketmq</groupId>-->
+        <!--            <artifactId>rocketmq-all</artifactId>-->
+        <!--            <version>${org.apache.rocketmq.rocketmq-all.version}</version>-->
+        <!--            <type>pom</type>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-common</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-broker</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-tools</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-store</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-namesrv</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-remoting</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-logappender</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-example</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-srvutil</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-filter</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-test</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <!--     启动脚本，配置文件等    -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.rocketmq</groupId>-->
+        <!--            <artifactId>rocketmq-distribution</artifactId>-->
+        <!--            <version>${org.apache.rocketmq.rocketmq-all.version}</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-openmessaging</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-logging</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-acl</artifactId>
+            <version>${org.apache.rocketmq.rocketmq-all.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

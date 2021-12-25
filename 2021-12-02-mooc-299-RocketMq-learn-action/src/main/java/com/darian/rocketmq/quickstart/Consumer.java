@@ -8,6 +8,7 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 
 import java.util.List;
@@ -28,9 +29,18 @@ public class Consumer {
         consumer.setNamesrvAddr(Const.NAMESRV_ADDR_SINGLE);
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
 
-        String topic = "darian1996_test_quick_topic";
+        String topic = Const.TEST_QUICK_TOPIC;
         consumer.subscribe(topic,
                 "*");
+
+        consumer.setConsumeThreadMax(1);
+
+        // 设置最大的重试次数
+        consumer.setMaxReconsumeTimes(3);
+        // BROADCASTING("BROADCASTING"),
+        //    CLUSTERING("CLUSTERING");
+        // 默认
+//        consumer.setMessageModel(MessageModel.CLUSTERING);
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
@@ -53,7 +63,8 @@ public class Consumer {
                     e.printStackTrace();
                     int reconsumeTimes = messageExt.getReconsumeTimes();
 
-                    System.err.println(String.format("[%s][reconsumeTimes:%s]", System.currentTimeMillis(), reconsumeTimes));
+                    System.err.println(String.format("[%s][reconsumeTimes:%s]",
+                            System.currentTimeMillis(), reconsumeTimes));
                     if (reconsumeTimes > 3) {
                         //  记录日志
                         //  做补偿处理
@@ -64,7 +75,6 @@ public class Consumer {
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });
-
         consumer.start();
 
 

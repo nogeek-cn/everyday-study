@@ -12,6 +12,9 @@ import org.springframework.context.annotation.PropertySource;
 
 import javax.annotation.Resource;
 
+/**
+ * https://space.bilibili.com/5096022/channel/collectiondetail?sid=210809
+ */
 @SpringBootApplication
 @PropertySource("classpath:META-INF/spring/demo-context.properties")
 @ImportResource({"classpath:META-INF/spring/*.xml"})

@@ -43,22 +43,24 @@ public class DemoApplication extends Application {
         Scene scene = new Scene(group);
         primaryStage.setScene(scene);
 
-        String dateTimeString = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault())
-                .format(new Date().toInstant());
-
         // 标签
-        Label label1 = new Label("番茄工作法提示你：\n    " + dateTimeString);
+        Label label1 = new Label("番茄工作法提示你：");
         label1.setLayoutX(130);
-        label1.setLayoutY(130);
+        label1.setLayoutY(120);
         label1.setFont(Font.font(60));
         label1.setStyle("-fx-text-fill: linear-gradient(to right, #e44219, #005ff3);"
                 + "-fx-alignment: center");
         group.getChildren().add(label1);
 
 
-        Label label2 = new Label("已经工作了 20 分钟了，请休息两分钟继续工作！！！");
-        label2.setLayoutX(230);
-        label2.setLayoutY(420);
+        String dateTimeString = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                .withZone(ZoneId.systemDefault())
+                .format(new Date().toInstant());
+        Label label2 = new Label("\t已经工作了 20 分钟了，请休息两分钟继续工作！！！"
+                + "\n\n\n \t\t\t\t\t\t\t\t\t"
+                + dateTimeString);
+        label2.setLayoutX(130);
+        label2.setLayoutY(320);
         label2.setFont(Font.font(40));
         // 背景颜色渐变
 //        label2.setStyle("-fx-background-color: linear-gradient(to right, #e44219, #005ff3)");

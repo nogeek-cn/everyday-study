@@ -12,6 +12,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.logging.SimpleFormatter;
+
 @SpringBootApplication
 @PropertySource("classpath:META-INF/spring/demo-context.properties")
 @ImportResource({"classpath:META-INF/spring/*.xml"})
@@ -36,18 +42,23 @@ public class DemoApplication extends Application {
         Group group = new Group();
         Scene scene = new Scene(group);
         primaryStage.setScene(scene);
+
+        String dateTimeString = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").withZone(ZoneId.systemDefault())
+                .format(new Date().toInstant());
+
         // 标签
-        Label label1 = new Label("番茄工作法提示你：");
+        Label label1 = new Label("番茄工作法提示你：\n    " + dateTimeString);
         label1.setLayoutX(130);
         label1.setLayoutY(130);
         label1.setFont(Font.font(60));
-        label1.setStyle("-fx-text-fill: linear-gradient(to right, #e44219, #005ff3)");
+        label1.setStyle("-fx-text-fill: linear-gradient(to right, #e44219, #005ff3);"
+                + "-fx-alignment: center");
         group.getChildren().add(label1);
 
 
         Label label2 = new Label("已经工作了 20 分钟了，请休息两分钟继续工作！！！");
-        label2.setLayoutX(180);
-        label2.setLayoutY(300);
+        label2.setLayoutX(230);
+        label2.setLayoutY(420);
         label2.setFont(Font.font(40));
         // 背景颜色渐变
 //        label2.setStyle("-fx-background-color: linear-gradient(to right, #e44219, #005ff3)");

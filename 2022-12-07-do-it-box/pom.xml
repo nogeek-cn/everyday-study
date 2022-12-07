@@ -47,7 +47,7 @@
                 <version>${spring.boot.version}</version>
                 <configuration>
                     <mainClass>com.darian.DemoApplication</mainClass>
-                    <finalName>do-it-box</finalName>
+                    <finalName>JustDoItBox</finalName>
                 </configuration>
                 <executions>
                     <execution>

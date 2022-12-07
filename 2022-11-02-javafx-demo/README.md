@@ -15,9 +15,10 @@
 - [x] 11.设置快捷键
 - [x] 12.输入框、密码框、标签，实用技术
 - [x] 13.AnchorPane布局类
-- [x] 14.HBox 和 Vbox
-- [x] 15.setManaged 、Setvisiable 、 setObacity
-- [x] 
+- [ ] 14.HBox 和 Vbox
+- [x] 15.setManaged 、Setvisiable 、 setObacity 
+- [x] 16.
+- [x] 17.
 - [x] 
 - [x] 
 - [x] 

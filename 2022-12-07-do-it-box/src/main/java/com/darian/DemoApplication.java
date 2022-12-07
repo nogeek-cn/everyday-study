@@ -4,25 +4,18 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.paint.LinearGradient;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 
-import javax.annotation.Resource;
-
 @SpringBootApplication
 @PropertySource("classpath:META-INF/spring/demo-context.properties")
 @ImportResource({"classpath:META-INF/spring/*.xml"})
-public class DemoApplication extends Application implements InitializingBean {
+public class DemoApplication extends Application {
 
     private static Logger LOGGER = LoggerFactory.getLogger(DemoApplication.class);
 
@@ -61,29 +54,12 @@ public class DemoApplication extends Application implements InitializingBean {
 
         label2.setStyle("-fx-text-fill: linear-gradient(to right, #e44219, #005ff3)");
         group.getChildren().add(label2);
-
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {
         launch(args);
 //        SpringApplication.run(DemoApplication.class, args);
-    }
-
-    @Value("${project.user.name}")
-    private String name;
-
-    @Resource
-    private UserInfo userInfo;
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        LOGGER.info(userInfo.toString());
-        LOGGER.info(name);
-    }
-
-    @Data
-    public static class UserInfo {
-        private String name;
     }
 }

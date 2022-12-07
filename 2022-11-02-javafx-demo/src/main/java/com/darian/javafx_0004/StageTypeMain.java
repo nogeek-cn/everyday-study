@@ -48,7 +48,7 @@ public class StageTypeMain extends Application {
         stage5.show();
 
         // 退出所有的窗口
-        Platform.exit();
+//        Platform.exit();
 
         primaryStage.show();
     }

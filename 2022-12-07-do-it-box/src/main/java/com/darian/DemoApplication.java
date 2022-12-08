@@ -1,9 +1,15 @@
 package com.darian;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
@@ -43,30 +49,44 @@ public class DemoApplication extends Application {
         Scene scene = new Scene(group);
         primaryStage.setScene(scene);
 
-        // 标签
-        Label label1 = new Label("番茄工作法提示你：");
-        label1.setLayoutX(130);
-        label1.setLayoutY(120);
-        label1.setFont(Font.font(60));
-        label1.setStyle("-fx-text-fill: linear-gradient(to right, #e44219, #005ff3);"
+        // 知道了按钮
+        Button quickButton = new Button();
+        quickButton.setLayoutX(400);
+        quickButton.setLayoutY(30);
+        quickButton.setText("知道啦！退下吧！");
+        quickButton.setFont(Font.font(60));
+        quickButton.setStyle("-fx-text-fill: linear-gradient(to right, #e44219, #005ff3);"
                 + "-fx-alignment: center");
-        group.getChildren().add(label1);
+        quickButton.setOnAction(event -> {
+            LOGGER.info("[quickButton.onAction]... ... ... ... ... ... ... ... ");
+            Platform.exit();
+        });
+        group.getChildren().add(quickButton);
+
+        // 主标题，标签
+        Label mainTitleLabel = new Label("番茄工作法提示你：");
+        mainTitleLabel.setLayoutX(130);
+        mainTitleLabel.setLayoutY(180);
+        mainTitleLabel.setFont(Font.font(60));
+        mainTitleLabel.setStyle("-fx-text-fill: linear-gradient(to right, #e44219, #005ff3);"
+                + "-fx-alignment: center");
+        group.getChildren().add(mainTitleLabel);
 
 
+        // 副标题，标签
         String dateTimeString = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 .withZone(ZoneId.systemDefault())
                 .format(new Date().toInstant());
-        Label label2 = new Label("\t已经工作了 20 分钟了，请休息两分钟继续工作！！！"
+        Label subtitleLabel = new Label("\t已经工作了 20 分钟了，请休息两分钟继续工作！！！"
                 + "\n\n\n \t\t\t\t\t\t\t\t\t"
                 + dateTimeString);
-        label2.setLayoutX(130);
-        label2.setLayoutY(320);
-        label2.setFont(Font.font(40));
+        subtitleLabel.setLayoutX(130);
+        subtitleLabel.setLayoutY(320);
+        subtitleLabel.setFont(Font.font(40));
         // 背景颜色渐变
-//        label2.setStyle("-fx-background-color: linear-gradient(to right, #e44219, #005ff3)");
-
-        label2.setStyle("-fx-text-fill: linear-gradient(to right, #e44219, #005ff3)");
-        group.getChildren().add(label2);
+//        subtitleLabel.setStyle("-fx-background-color: linear-gradient(to right, #e44219, #005ff3)");
+        subtitleLabel.setStyle("-fx-text-fill: linear-gradient(to right, #e44219, #005ff3)");
+        group.getChildren().add(subtitleLabel);
         primaryStage.show();
 
     }

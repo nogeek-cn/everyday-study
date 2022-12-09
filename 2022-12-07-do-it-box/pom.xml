@@ -58,16 +58,15 @@
                 </executions>
             </plugin>
 
+            <!--                https://github.com/javafx-maven-plugin/javafx-maven-plugin -->
+            <!--                https://blog.csdn.net/a974988176/article/details/127973611 -->
             <plugin>
-<!--                https://github.com/javafx-maven-plugin/javafx-maven-plugin -->
-<!--                https://blog.csdn.net/a974988176/article/details/127973611 -->
                 <groupId>com.zenjava</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>8.8.3</version>
                 <configuration>
                     <vendor>Darian</vendor>
                     <appName>JustDoItBoxAPP</appName>
-<!--                   -->
                     <bundler>ALL</bundler>
                     <mainClass>com.darian.DemoApplication</mainClass>
                     <bundleArguments>
@@ -75,6 +74,59 @@
                     </bundleArguments>
                 </configuration>
             </plugin>
+
+
+<!--           javapackager maven 插件 -->
+<!--            https://github.com/fvarrui/JavaPackager -->
+<!--            <plugin>-->
+<!--                <groupId>io.github.fvarrui</groupId>-->
+<!--                <artifactId>javapackager</artifactId>-->
+<!--                <version>1.6.6</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>package</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            &lt;!&ndash; 启动类 &ndash;&gt;-->
+<!--                            <mainClass>com.darian.DemoApplication</mainClass>-->
+<!--                            &lt;!&ndash; 绑定自定义JRE路径&ndash;&gt;-->
+<!--                            <bundleJre>true</bundleJre>-->
+<!--                            <jrePath>/Library/java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home/jre</jrePath>-->
+<!--                            <generateInstaller>true</generateInstaller>-->
+<!--                            <administratorRequired>false</administratorRequired>-->
+<!--&lt;!&ndash;                            <platform>auto|linux|mac|windows</platform>&ndash;&gt;-->
+<!--                            &lt;!&ndash; 操作系统&ndash;&gt;-->
+<!--&lt;!&ndash;                            <platform>windows</platform>&ndash;&gt;-->
+<!--                            <platform>mac</platform>-->
+
+<!--                            &lt;!&ndash; 名称与版本&ndash;&gt;-->
+<!--                            <displayName>JustDoItBoxAPP</displayName>-->
+<!--                            <name>JustDoItBoxAPP</name>-->
+<!--                            <version>1.0</version>-->
+<!--                            &lt;!&ndash; 手动引入额外资源&ndash;&gt;-->
+<!--&lt;!&ndash;                            <additionalResources>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <additionalResource>D:\Item\GD_AmtHardwareTest1.0\datas</additionalResource>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <additionalResource>D:\Item\GD_AmtHardwareTest1.0\lib</additionalResource>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </additionalResources>&ndash;&gt;-->
+<!--                            &lt;!&ndash;详细参数配置&ndash;&gt;-->
+<!--                            <winConfig>-->
+<!--                                <icoFile>${project.basedir}/src/main/resources/icon/img.ico</icoFile>-->
+<!--                                <generateSetup>false</generateSetup>-->
+<!--                                <generateMsi>false</generateMsi>-->
+<!--                                <generateMsm>false</generateMsm>-->
+<!--                            </winConfig>-->
+<!--&lt;!&ndash;                            <macConfig>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <icoFile>${project.basedir}/src/main/resources/icon/img.ico</icoFile>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <generateSetup>false</generateSetup>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <generateMsi>false</generateMsi>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <generateMsm>false</generateMsm>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </macConfig>&ndash;&gt;-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

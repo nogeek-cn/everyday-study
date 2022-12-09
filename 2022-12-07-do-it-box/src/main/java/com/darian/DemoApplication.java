@@ -55,8 +55,10 @@ public class DemoApplication extends Application {
         quickButton.setLayoutY(30);
         quickButton.setText("知道啦！退下吧！");
         quickButton.setFont(Font.font(60));
-        quickButton.setStyle("-fx-text-fill: linear-gradient(to right, #e44219, #005ff3);"
-                + "-fx-alignment: center");
+        quickButton.setStyle("-fx-text-fill: linear-gradient(to right, #e44219, #005ff3);");
+
+//        #F6AAF2 #8CC9F3 #00FBEF
+        quickButton.setStyle("-fx-text-fill: linear-gradient(to right, #F6AAF2, #00FBEF);");
         quickButton.setOnAction(event -> {
             LOGGER.info("[quickButton.onAction]... ... ... ... ... ... ... ... ");
             Platform.exit();

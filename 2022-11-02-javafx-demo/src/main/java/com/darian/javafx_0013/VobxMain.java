@@ -35,6 +35,9 @@ public class VobxMain extends Application {
 
         anchorPane2.setStyle("-fx-background-color: #FF3E96");
 
+        // 这个可以设置宽度
+        anchorPane2.setPrefWidth(100);
+        anchorPane2.setPrefHeight(200);
 
         anchorPane2.getChildren().add(button1);
         AnchorPane.setRightAnchor(button1, 0.0);

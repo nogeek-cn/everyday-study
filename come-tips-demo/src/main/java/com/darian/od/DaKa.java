@@ -53,14 +53,20 @@ public class DaKa {
         String collect = treeMap.entrySet().stream().sorted(new Comparator<Map.Entry<Integer, Integer>>() {
                     @Override
                     public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
-                        if (o1.getValue().compareTo(o2.getValue()) == 0) {
-                            if (orderMap.get(o1.getKey()).compareTo(orderMap.get(o2.getKey())) == 0) {
-                                return o1.getKey().compareTo(o2.getKey());
-                            } else {
-                                return orderMap.get(o1.getKey()).compareTo(orderMap.get(o2.getKey()));
-                            }
+                        // 打卡多的 > 打卡少的
+                        int daKaCiShuCom = o1.getValue().compareTo(o2.getValue());
+                        if (daKaCiShuCom != 0) {
+                            return -daKaCiShuCom;
                         }
-                        return -o1.getValue().compareTo(o2.getValue());
+
+                        // 同一天打开算同一时间打卡，打卡前一天的 > 打卡后一天的
+                        int daKaTimeCom = orderMap.get(o1.getKey()).compareTo(orderMap.get(o2.getKey()));
+                        if (daKaTimeCom != 0) {
+                            return daKaTimeCom;
+                        }
+
+                        // 员工需要小的 > 员工序号大的
+                        return o1.getKey().compareTo(o2.getKey());
                     }
                 })
 //                .peek(entry -> {

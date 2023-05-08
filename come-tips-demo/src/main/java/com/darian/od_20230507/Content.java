@@ -1,11 +1,8 @@
-package com.darian.od;
+package com.darian.od_20230507;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /***
  * 知识图谱新词挖掘 1

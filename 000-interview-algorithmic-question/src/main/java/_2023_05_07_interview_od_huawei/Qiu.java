@@ -1,4 +1,4 @@
-package com.darian.od_20230507;
+package _2023_05_07_interview_od_huawei;
 
 import java.util.*;
 import java.util.stream.Collectors;

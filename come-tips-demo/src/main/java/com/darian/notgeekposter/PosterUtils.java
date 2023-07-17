@@ -8,11 +8,13 @@ import org.springframework.core.io.ClassPathResource;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Objects;
 
 /***
  *
@@ -96,7 +98,9 @@ public class PosterUtils {
 
                 int otherMingYanWeight = Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(otherMingYan);
                 if (otherMingYanWeight <= 550) {
-                    printStringList.add(otherMingYan);
+                    if (Objects.nonNull(otherMingYan) && otherMingYan.length() > 1) {
+                        printStringList.add(otherMingYan);
+                    }
                     break;
                 }
             }
@@ -161,8 +165,12 @@ public class PosterUtils {
 
     public static void overlyingImageAndSaveTest() {
         String mingYan =  "我知道我不知道";
-        mingYan = "架构师的个人哲学与认知先于架构师所谈的架构原则";
+//        mingYan = "架构师的个人哲学与认知先于架构师所谈的架构原则";
         String author = "苏格拉底";
+//        author = "福强";
+
+//        mingYan = "我爱小娟娟，至死不渝";
+//        author = "朱仁杰";
 
 
         String domainStaticPath = System.getProperty("user.dir")
@@ -180,6 +188,17 @@ public class PosterUtils {
         BufferedImage buffImg = overlyingImageTest(mingYan, author);
         // 输出水印图片
         generateSaveFile(buffImg, saveFilePath);
+
+        try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
+            ImageIO.write(buffImg, "png", os);
+            byte[] fileByte = os.toByteArray();
+            String imageBase64Str = "data:image/png;base64," + org.apache.commons.codec.binary.Base64.encodeBase64String(fileByte);
+            System.out.println();
+            System.out.println(imageBase64Str);
+            System.out.println();
+        } catch (Exception e) {
+            LOGGER.info("[DomainImageUtils.overlyingImageAndSaveTest]" + e.getMessage(), e);
+        }
     }
 
     public static void main(String[] args) {

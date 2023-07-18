@@ -42,7 +42,7 @@ public class PosterUtils {
          */
 
         String fontFileClassPath = "static" + File.separator + "domain" + File.separator + "maozidongziti.ttf";
-        String sourceFileClassPath = "static" + File.separator + "domain" + File.separator + "background.png";
+        String sourceFileClassPath = "static" + File.separator + "domain" + File.separator + "mingYan.png";
 
         LOGGER.debug("fontFileClassPath: " + fontFileClassPath);
         LOGGER.debug("sourceFileClassPath: " + sourceFileClassPath);

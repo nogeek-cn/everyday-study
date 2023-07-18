@@ -115,11 +115,12 @@ public class PosterUtils {
                 y = y + fontSize * 3 / 2;
             }
 
-            author = "——" + author;
-            fontGraphics.drawString(author,
-                    575 - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(author),
-                    y);
-
+            if (Objects.nonNull(author) && !"".equals(author)) {
+                author = "——" + author;
+                fontGraphics.drawString(author,
+                        575 - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(author),
+                        y);
+            }
 
 
             fontSize = fontSize / 3;

@@ -86,9 +86,13 @@ public class IconUtils {
             // 画字体
             fontGraphics.setPaint(fontGradientPaint);
             // x 左右，y 上下
-            fontGraphics.drawString("不止", 20, 290);
-            fontGraphics.drawString("极客", 20, 590);
+            fontGraphics.drawString("不止", 20, 280);
+            fontGraphics.drawString("极客", 20, 580);
 
+
+//            font = font.deriveFont(Font.PLAIN, 20);
+//            fontGraphics.setFont(font);
+//            fontGraphics.drawString("https://notgeek.cn", 420, 630);
             fontGraphics.dispose();
 
             return bufferImage;

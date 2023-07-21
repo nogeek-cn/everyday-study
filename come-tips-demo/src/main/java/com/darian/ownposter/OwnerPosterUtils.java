@@ -103,7 +103,7 @@ public class OwnerPosterUtils {
                     spilt = i;
                 }
 
-                List<Character> notfirstList = Arrays.asList('。', '，', '！', '？');
+                List<Character> notfirstList = Arrays.asList('。', ';', '；', '，', '！', '？', '”', ',');
                 while (spilt < otherMingYan.length()
                         && notfirstList.contains(otherMingYan.charAt(spilt))) {
                     spilt = spilt - 1;
@@ -205,6 +205,8 @@ public class OwnerPosterUtils {
 //        mingYan = "罗翔老师说：\"如果你整天不读书，不运动，不节制消费，不反省自律，无兴趣、无爱好、无目标、无期望，生活是不会变好的。\" 这并非空洞的哲学，而是切实的智慧。";
 
         mingYan = "事实，是独立于人的判断的客观存在。观点，是我们对一个事实的看法。立场，是被位置和利益影响的观点。信仰，是一套完全自洽的逻辑体系。当一个人“屁股决定脑袋”的时候，你应该做的事情，是对他说：it's good for you. 反过来，我们也要时刻反省自己。我说的话，我的表达，是事实，还是观点，还是立场，还是信仰？-- 刘润。      我觉得他说得对，是立场。";
+        mingYan = "“架构师的个人哲学与认知先于架构师所谈的架构原则。”去年就看到了这句话，今天才有一点感悟。我们通常是看到了他怎么做事的，再说他是一个什么样的人。而这个人为什么要这么做事的根因因为他是一个什么样的人。“个人哲学与认知”就是“他是什么样的人”；“架构原则”=“怎么做事”。有的人喜欢稳定有的人喜欢折腾其实是不同的人的个人哲学与认知的外化表现。";
+        mingYan = "只要捡回一条命，就可以重新再来。--《女座头市》";
 
 
         String domainStaticPath = System.getProperty("user.dir")

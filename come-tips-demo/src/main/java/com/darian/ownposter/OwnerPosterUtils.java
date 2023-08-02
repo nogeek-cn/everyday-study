@@ -33,6 +33,7 @@ public class OwnerPosterUtils {
                 || (character >= 'A' && character <= 'Z');
     }
 
+    private static List<Character> FU_HAO_LIST = Arrays.asList('。', ';', '；', '，', '！', '？', '”', ',', '：');
 
     /**
      * Java 测试图片叠加方法
@@ -53,18 +54,20 @@ public class OwnerPosterUtils {
         LOGGER.debug("fontFileClassPath: " + maoFontFileClassPath);
         LOGGER.debug("sourceFileClassPath: " + sourceFileClassPath);
 
-        int fontSize = 22;
+
         try {
 
             Font font = Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource(hanSonFontFileClassPath).getInputStream());
             BufferedImage bufferImage = ImageIO.read(new ClassPathResource(sourceFileClassPath).getInputStream());
-            // 字体和字体大小
-            font = font.deriveFont(Font.PLAIN, fontSize);
             // 获取图片的宽度
             int imageWidth = bufferImage.getWidth();
             // 获取图片的高度
             int imageHeight = bufferImage.getHeight();
             LOGGER.debug(String.format("[bufferImage][imageWidth][%s][imageHeight][%s]", imageWidth, imageHeight));
+
+            int fontSize = imageWidth / 25;
+            // 字体和字体大小
+            font = font.deriveFont(Font.PLAIN, fontSize);
 
             //
             Graphics2D fontGraphics = bufferImage.createGraphics();
@@ -86,24 +89,27 @@ public class OwnerPosterUtils {
 
             // 画字体
             fontGraphics.setPaint(fontGradientPaint);
-            int y = 50;
+            int y = fontSize * 5 / 2;
 
 
             List<String> printStringList = new ArrayList<>();
 
             String otherMingYan = mingYan;
             while (true) {
+                int wenZiWeight = imageWidth * 90 / 100;
+
                 int spilt = 0;
                 for (int i = 1; i <= otherMingYan.length(); i++) {
+
                     String beforeString = otherMingYan.substring(0, i);
                     int beforeStringWidth = Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(beforeString);
-                    if (beforeStringWidth > 550) {
+                    if (beforeStringWidth > wenZiWeight) {
                         break;
                     }
                     spilt = i;
                 }
 
-                List<Character> notfirstList = Arrays.asList('。', ';', '；', '，', '！', '？', '”', ',');
+                List<Character> notfirstList = FU_HAO_LIST;
                 while (spilt < otherMingYan.length()
                         && notfirstList.contains(otherMingYan.charAt(spilt))) {
                     spilt = spilt - 1;
@@ -126,7 +132,7 @@ public class OwnerPosterUtils {
 
 
                 int otherMingYanWeight = Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(otherMingYan);
-                if (otherMingYanWeight <= 550) {
+                if (otherMingYanWeight <= wenZiWeight) {
                     if (Objects.nonNull(otherMingYan) && otherMingYan.length() > 1) {
                         printStringList.add(otherMingYan);
                     }
@@ -138,23 +144,23 @@ public class OwnerPosterUtils {
             // x 左右，y 上下
 
             for (String printString : printStringList) {
-                fontGraphics.drawString(printString, 25, y);
+                fontGraphics.drawString(printString, imageWidth / 20, y);
                 y = y + fontSize * 3 / 2;
             }
 
 
-            fontSize = 120;
+            fontSize = imageWidth / 5;
             font = Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource(maoFontFileClassPath).getInputStream());
             // 字体和字体大小
             font = font.deriveFont(Font.PLAIN, fontSize);
             fontGraphics.setFont(font);
-            y = y + 100;
+            y = y + fontSize * 5 / 6;
 
             String footer = "不止极客";
             fontGraphics.drawString(footer,
-                    310 - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(footer) / 2,
+                    imageWidth / 2 - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(footer) / 2,
                     y);
-            y = y + 66;
+            y = y + fontSize / 2;
 
 
 //            fontSize = 22;
@@ -170,7 +176,7 @@ public class OwnerPosterUtils {
 
 
             // 裁剪
-            bufferImage = bufferImage.getSubimage(0, 0, 600, y);
+            bufferImage = bufferImage.getSubimage(0, 0, imageWidth, y);
             return bufferImage;
         } catch (Exception e) {
             LOGGER.error("[DomainImageUtils.overlyingImageTest]", e);
@@ -206,7 +212,7 @@ public class OwnerPosterUtils {
 
         mingYan = "事实，是独立于人的判断的客观存在。观点，是我们对一个事实的看法。立场，是被位置和利益影响的观点。信仰，是一套完全自洽的逻辑体系。当一个人“屁股决定脑袋”的时候，你应该做的事情，是对他说：it's good for you. 反过来，我们也要时刻反省自己。我说的话，我的表达，是事实，还是观点，还是立场，还是信仰？-- 刘润。      我觉得他说得对，是立场。";
         mingYan = "“架构师的个人哲学与认知先于架构师所谈的架构原则。”去年就看到了这句话，今天才有一点感悟。我们通常是看到了他怎么做事的，再说他是一个什么样的人。而这个人为什么要这么做事的根因因为他是一个什么样的人。“个人哲学与认知”就是“他是什么样的人”；“架构原则”=“怎么做事”。有的人喜欢稳定有的人喜欢折腾其实是不同的人的个人哲学与认知的外化表现。";
-        mingYan = "只要捡回一条命，就可以重新再来。--《女座头市》";
+        mingYan = "在每个案件里，你从不同的角度去看，可能都会得倒完全不同的所谓主观真相，你所代表的立场不同，你所追求的主观真相和结果自然也有所不同，而案件本身的客观真相，永远也无法复原，或者说：我们永远无法得知在过去的某个时空里，这个案件到底是如何发生的？每个诉讼参与人所做的，无非就是通过一系列的证据和说理，尽全力，无限逼近客观真相。亦或是，无限逼近那个我方苦苦追求所期望的与我方利益或立场相符的真相，而这个无限逼近真相近身肉搏的过程，我们一般称之为“诉讼”。在这个过程中，有着无数的不确定性，这也正是诉讼两个字本身最大的魅力。 --律师老韩";
 
 
         String domainStaticPath = System.getProperty("user.dir")

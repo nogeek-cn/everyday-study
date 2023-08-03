@@ -25,6 +25,10 @@ import java.util.Objects;
 
 public class OwnerPosterUtils {
 
+    private static String RESOURCES_PATH = System.getProperty("user.dir")
+            + File.separator + "src"
+            + File.separator + "main"
+            + File.separator + "resources";
 
     private static Logger LOGGER = LoggerFactory.getLogger(OwnerPosterUtils.class);
 
@@ -66,6 +70,8 @@ public class OwnerPosterUtils {
             LOGGER.debug(String.format("[bufferImage][imageWidth][%s][imageHeight][%s]", imageWidth, imageHeight));
 
             int fontSize = imageWidth / 25;
+            int wenZiWeight = imageWidth * 90 / 100;
+
             // 字体和字体大小
             font = font.deriveFont(Font.PLAIN, fontSize);
 
@@ -96,8 +102,6 @@ public class OwnerPosterUtils {
 
             String otherMingYan = mingYan;
             while (true) {
-                int wenZiWeight = imageWidth * 90 / 100;
-
                 int spilt = 0;
                 for (int i = 1; i <= otherMingYan.length(); i++) {
 
@@ -148,9 +152,15 @@ public class OwnerPosterUtils {
                 y = y + fontSize * 3 / 2;
             }
 
+            // 画一条分割线
+            Stroke dash = new BasicStroke(5.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND, 3.5f, null, 0f);
+            fontGraphics.setStroke(dash);
+            fontGraphics.drawLine((imageWidth - wenZiWeight) / 2, y, wenZiWeight + ((imageWidth - wenZiWeight) / 2), y);
 
-            fontSize = imageWidth / 5;
-            font = Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource(maoFontFileClassPath).getInputStream());
+            y = y + fontSize * 3 / 2;
+
+            fontSize = imageWidth / 7;
+//            font = Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource(maoFontFileClassPath).getInputStream());
             // 字体和字体大小
             font = font.deriveFont(Font.PLAIN, fontSize);
             fontGraphics.setFont(font);
@@ -171,6 +181,33 @@ public class OwnerPosterUtils {
 //                    310 - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(footer) / 2,
 //                    y);
 //            y = y + 22;
+
+
+            // 写商标log
+            String logImgPath = "static"
+                    + File.separator + "domain"
+                    + File.separator + "into"
+                    + File.separator + "NotGeekAvatarSmall.png";
+
+            BufferedImage logBufferedImage = ImageIO.read(new ClassPathResource(logImgPath).getInputStream());
+            fontGraphics.drawImage(logBufferedImage,
+                    imageWidth / 24,
+                    y - logBufferedImage.getHeight() - fontSize / 3,
+                    logBufferedImage.getWidth(),
+                    logBufferedImage.getHeight(),
+                    null);
+
+            String qrCodeImgPath = "static"
+                    + File.separator + "domain"
+                    + File.separator + "into"
+                    + File.separator + "notgeekCNQRCode.png";
+            BufferedImage qrCodeBufferedImage = ImageIO.read(new ClassPathResource(qrCodeImgPath).getInputStream());
+            fontGraphics.drawImage(qrCodeBufferedImage,
+                     imageWidth - imageWidth / 24 - qrCodeBufferedImage.getWidth(),
+                    y - qrCodeBufferedImage.getHeight() - fontSize / 3,
+                    qrCodeBufferedImage.getWidth(),
+                    qrCodeBufferedImage.getHeight(),
+                    null);
 
             fontGraphics.dispose();
 
@@ -215,10 +252,7 @@ public class OwnerPosterUtils {
         mingYan = "在每个案件里，你从不同的角度去看，可能都会得倒完全不同的所谓主观真相，你所代表的立场不同，你所追求的主观真相和结果自然也有所不同，而案件本身的客观真相，永远也无法复原，或者说：我们永远无法得知在过去的某个时空里，这个案件到底是如何发生的？每个诉讼参与人所做的，无非就是通过一系列的证据和说理，尽全力，无限逼近客观真相。亦或是，无限逼近那个我方苦苦追求所期望的与我方利益或立场相符的真相，而这个无限逼近真相近身肉搏的过程，我们一般称之为“诉讼”。在这个过程中，有着无数的不确定性，这也正是诉讼两个字本身最大的魅力。 --律师老韩";
 
 
-        String domainStaticPath = System.getProperty("user.dir")
-                + File.separator + "src"
-                + File.separator + "main"
-                + File.separator + "resources"
+        String domainStaticPath = RESOURCES_PATH
                 + File.separator + "static"
                 + File.separator + "domain";
 

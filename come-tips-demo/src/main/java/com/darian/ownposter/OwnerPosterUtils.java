@@ -52,7 +52,7 @@ public class OwnerPosterUtils {
          */
 
         String maoFontFileClassPath = "static" + File.separator + "domain" + File.separator + "maozidongziti.ttf";
-        String hanSonFontFileClassPath = "static" + File.separator + "domain" + File.separator + "SourceHanSansCN-Bold.ttf";
+        String hanSonFontFileClassPath = "static" + File.separator + "domain" + File.separator + "SourceHanSansCN-Light.ttf";
         String sourceFileClassPath = "static" + File.separator + "domain" + File.separator + "mingYan.png";
 
         LOGGER.debug("fontFileClassPath: " + maoFontFileClassPath);

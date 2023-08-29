@@ -4,13 +4,15 @@ package com.darian.ownposter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +46,16 @@ public class OwnerPosterUtils {
      */
     public static BufferedImage overlyingImageTest(String mingYan) {
 
+        // https://source.unsplash.com/1280x600/?technology
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<UnsplashImgResponse> forObject =
+                restTemplate.getForEntity("https://api.unsplash.com/photos/random/?client_id=hnk-fslShmHIGg8EE-IXCUVF25Bj9ubP6CIfFEIVb44"
+                        + "&query=black,technology",
+//                                + "&query=white,technology",
+                        UnsplashImgResponse.class);
+        System.out.println(forObject);
+
         /**
          * 注意-产品要求：
          *          字体-自定义了一个字体
@@ -52,7 +64,7 @@ public class OwnerPosterUtils {
          */
 
         String maoFontFileClassPath = "static" + File.separator + "domain" + File.separator + "maozidongziti.ttf";
-        String hanSonFontFileClassPath = "static" + File.separator + "domain" + File.separator + "SourceHanSansCN-Light.ttf";
+        String hanSonFontFileClassPath = "static" + File.separator + "domain" + File.separator + "SourceHanSansCN-Bold.ttf";
         String sourceFileClassPath = "static" + File.separator + "domain" + File.separator + "mingYan.png";
 
         LOGGER.debug("fontFileClassPath: " + maoFontFileClassPath);
@@ -60,6 +72,12 @@ public class OwnerPosterUtils {
 
 
         try {
+
+            UnsplashImgResponse unsplashImgResponse = forObject.getBody();
+            String posterCoverUrl = unsplashImgResponse.getUrls().getRaw() + "&w=1028&h=600";
+            System.out.println(posterCoverUrl);
+            BufferedImage postAvgBuffer = ImageIO.read(new URL(posterCoverUrl));
+
 
             Font font = Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource(hanSonFontFileClassPath).getInputStream());
             BufferedImage bufferImage = ImageIO.read(new ClassPathResource(sourceFileClassPath).getInputStream());
@@ -96,6 +114,14 @@ public class OwnerPosterUtils {
             // 画字体
             fontGraphics.setPaint(fontGradientPaint);
             int y = fontSize * 5 / 2;
+
+            fontGraphics.drawImage(postAvgBuffer,
+                    0,
+                    0,
+                    imageWidth,
+                    postAvgBuffer.getHeight(),
+                    null);
+            y = y + 600;
 
 
             List<String> printStringList = new ArrayList<>();
@@ -203,7 +229,7 @@ public class OwnerPosterUtils {
                     + File.separator + "notgeekCNQRCode.png";
             BufferedImage qrCodeBufferedImage = ImageIO.read(new ClassPathResource(qrCodeImgPath).getInputStream());
             fontGraphics.drawImage(qrCodeBufferedImage,
-                     imageWidth - imageWidth / 24 - qrCodeBufferedImage.getWidth(),
+                    imageWidth - imageWidth / 24 - qrCodeBufferedImage.getWidth(),
                     y - qrCodeBufferedImage.getHeight() - fontSize / 3,
                     qrCodeBufferedImage.getWidth(),
                     qrCodeBufferedImage.getHeight(),
@@ -270,10 +296,35 @@ public class OwnerPosterUtils {
             byte[] fileByte = os.toByteArray();
             String imageBase64Str = "data:image/png;base64," + org.apache.commons.codec.binary.Base64.encodeBase64String(fileByte);
             System.out.println();
-            System.out.println(imageBase64Str);
+//            System.out.println(imageBase64Str);
             System.out.println();
         } catch (Exception e) {
             LOGGER.info("[DomainImageUtils.overlyingImageAndSaveTest]" + e.getMessage(), e);
+        }
+    }
+
+
+    public static class UnsplashImgResponse implements Serializable {
+        private UnsplashImgResponseURLS urls;
+
+        public UnsplashImgResponseURLS getUrls() {
+            return urls;
+        }
+
+        public void setUrls(UnsplashImgResponseURLS urls) {
+            this.urls = urls;
+        }
+    }
+
+    public static class UnsplashImgResponseURLS implements Serializable {
+        private String raw;
+
+        public String getRaw() {
+            return raw;
+        }
+
+        public void setRaw(String raw) {
+            this.raw = raw;
         }
     }
 

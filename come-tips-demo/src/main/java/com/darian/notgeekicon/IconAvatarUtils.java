@@ -91,11 +91,13 @@ public class IconAvatarUtils {
             fontGraphics.drawString(
                     "不止",
                     (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth("不止")) / 2 + 10,
-                    (imageHeight) / 2 - 20
+                    (imageHeight) / 2 - Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent() / 2
             );
             fontGraphics.drawString("极客",
-                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth("极客")) / 2 + 10
-                    , (imageHeight) / 2 + font.getSize() - 20);
+                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth("极客")) / 2 + 10,
+                    (imageHeight) / 2 + font.getSize() - Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent() / 2
+            );
+//            System.out.println("Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent(): " + Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent());
 
             Stroke dash = new BasicStroke(10.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND, 3.5f, null, 0f);
             fontGraphics.setStroke(dash);
@@ -103,9 +105,27 @@ public class IconAvatarUtils {
             fontGraphics.drawOval(20, 20, 600, 600);
 
 
+//            font = font.deriveFont(Font.PLAIN, 50);
+//            fontGraphics.setFont(font);
+//            fontGraphics.drawString(
+//                    "nogeek.cn",
+//                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth("nogeek.cn")) / 2
+//                    ,
+//                    580
+//            );
+//
+//            fontGraphics.drawString(
+//                    "nogeek.cn",
+//                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth("nogeek.cn")) / 2
+//                    ,
+//                    90
+//            );
+
+
 //            font = font.deriveFont(Font.PLAIN, 20);
 //            fontGraphics.setFont(font);
-//            fontGraphics.drawString("https://notgeek.cn", 420, 630);
+//            fontGraphics.drawString("https://nogeek.cn", 420, 630);
+
             fontGraphics.dispose();
 
             return bufferImage;

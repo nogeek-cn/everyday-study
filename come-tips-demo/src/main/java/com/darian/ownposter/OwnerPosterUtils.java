@@ -65,6 +65,7 @@ public class OwnerPosterUtils {
 
         String maoFontFileClassPath = "static" + File.separator + "domain" + File.separator + "maozidongziti.ttf";
         String hanSonFontFileClassPath = "static" + File.separator + "domain" + File.separator + "SourceHanSansCN-Bold.ttf";
+        String pingFangFileClassPath = "static" + File.separator + "domain" + File.separator + "PingFangMedium.ttf";
         String sourceFileClassPath = "static" + File.separator + "domain" + File.separator + "mingYan.png";
 
         LOGGER.debug("fontFileClassPath: " + maoFontFileClassPath);
@@ -79,7 +80,7 @@ public class OwnerPosterUtils {
             BufferedImage postAvgBuffer = ImageIO.read(new URL(posterCoverUrl));
 
 
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource(hanSonFontFileClassPath).getInputStream());
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource(pingFangFileClassPath).getInputStream());
             BufferedImage bufferImage = ImageIO.read(new ClassPathResource(sourceFileClassPath).getInputStream());
             // 获取图片的宽度
             int imageWidth = bufferImage.getWidth();
@@ -186,7 +187,7 @@ public class OwnerPosterUtils {
             y = y + fontSize * 3 / 2;
 
             fontSize = imageWidth / 7;
-//            font = Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource(maoFontFileClassPath).getInputStream());
+            font = Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource(hanSonFontFileClassPath).getInputStream());
             // 字体和字体大小
             font = font.deriveFont(Font.PLAIN, fontSize);
             fontGraphics.setFont(font);

@@ -67,6 +67,8 @@ public class OwnerPosterUtils {
         String hanSonFontFileClassPath = "static" + File.separator + "domain" + File.separator + "SourceHanSansCN-Bold.ttf";
         String pingFangFileClassPath = "static" + File.separator + "domain" + File.separator + "PingFangMedium.ttf";
         String sourceFileClassPath = "static" + File.separator + "domain" + File.separator + "mingYan.png";
+        String noGeekCnDomainClassPath = "static" + File.separator + "domain" + File.separator + "out" + File.separator + "NoGeekCNDomain.png";
+
 
         LOGGER.debug("fontFileClassPath: " + maoFontFileClassPath);
         LOGGER.debug("sourceFileClassPath: " + sourceFileClassPath);
@@ -122,6 +124,15 @@ public class OwnerPosterUtils {
                     imageWidth,
                     postAvgBuffer.getHeight(),
                     null);
+
+            BufferedImage noGeekBufferedImage = ImageIO.read(new ClassPathResource(noGeekCnDomainClassPath).getInputStream());
+            fontGraphics.drawImage(noGeekBufferedImage,
+                    fontSize,
+                    0,
+                    fontSize * 4,
+                    fontSize,
+                    null);
+
             y = y + 600;
 
 
@@ -213,15 +224,18 @@ public class OwnerPosterUtils {
             // 写商标log
             String logImgPath = "static"
                     + File.separator + "domain"
-                    + File.separator + "into"
-                    + File.separator + "NotGeekAvatarSmall.png";
+                    + File.separator + "out"
+                    + File.separator + "NotGeekAvatar.png";
+
+            int logBufferedImageWidth = 185;
+            int logBufferedImageHeight = 185;
 
             BufferedImage logBufferedImage = ImageIO.read(new ClassPathResource(logImgPath).getInputStream());
             fontGraphics.drawImage(logBufferedImage,
                     imageWidth / 24,
-                    y - logBufferedImage.getHeight() - fontSize / 3,
-                    logBufferedImage.getWidth(),
-                    logBufferedImage.getHeight(),
+                    y - logBufferedImageHeight - fontSize / 3,
+                    logBufferedImageWidth,
+                    logBufferedImageHeight,
                     null);
 
             String qrCodeImgPath = "static"

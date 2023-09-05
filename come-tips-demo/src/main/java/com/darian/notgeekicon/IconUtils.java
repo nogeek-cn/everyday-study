@@ -7,6 +7,7 @@ import org.springframework.core.io.ClassPathResource;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.font.GlyphVector;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -88,6 +89,19 @@ public class IconUtils {
             // x 左右，y 上下
             fontGraphics.drawString("不止", 20, 280);
             fontGraphics.drawString("极客", 20, 580);
+
+            // 虚线轮廓
+//            GlyphVector gv = font.createGlyphVector(fontGraphics.getFontRenderContext(), "不止极客");
+//            Shape shape = gv.getOutline();
+//
+//            float dash1[] = {10.0f};
+//            BasicStroke dashed = new BasicStroke(10.0f,
+//                    BasicStroke.CAP_BUTT,
+//                    BasicStroke.JOIN_MITER,
+//                    1f, dash1, 10.0f);
+//            fontGraphics.setStroke(dashed);
+//            fontGraphics.translate(200, 200);
+//            fontGraphics.draw(shape);
 
 
 //            font = font.deriveFont(Font.PLAIN, 20);

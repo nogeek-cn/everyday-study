@@ -16,6 +16,7 @@
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
 
 
+        <alibaba-fastjson-version>1.2.72</alibaba-fastjson-version>
     </properties>
 
     <dependencies>
@@ -29,6 +30,12 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>3.141.59</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${alibaba-fastjson-version}</version>
         </dependency>
 
         <dependency>

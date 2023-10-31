@@ -57,7 +57,7 @@ public class ReadHubDaily {
         System.out.println(dailyDate);
 
         String[] dailyDateSpilt = dailyDate.split("\\.");
-        readTopicVideoContent = readTopicVideoContent + "今天是" +  dailyDateSpilt[0] + "年";
+        readTopicVideoContent = readTopicVideoContent + "今天是" + dailyDateSpilt[0] + "年";
         readTopicVideoContent = readTopicVideoContent + dailyDateSpilt[1] + "月";
         readTopicVideoContent = readTopicVideoContent + dailyDateSpilt[2] + "日。";
 
@@ -109,7 +109,7 @@ public class ReadHubDaily {
 
 
             readTopicVideoContent = readTopicVideoContent + "\n"
-                    + "第 " + i + " 条新闻 : " + title + "。\n"
+                    + "第 " + (i + 1) + " 条新闻 : " + title + "。\n"
                     + content;
         }
 

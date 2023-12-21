@@ -90,11 +90,11 @@ public class IconAvatarUtils {
 //            fontGraphics.drawString("不止", 107, 320);
             fontGraphics.drawString(
                     "不止",
-                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth("不止")) / 2 + 10,
+                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth("不止")) / 2,
                     (imageHeight) / 2 - Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent() / 2
             );
             fontGraphics.drawString("极客",
-                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth("极客")) / 2 + 10,
+                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth("极客")) / 2,
                     (imageHeight) / 2 + font.getSize() - Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent() / 2
             );
 //            System.out.println("Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent(): " + Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent());

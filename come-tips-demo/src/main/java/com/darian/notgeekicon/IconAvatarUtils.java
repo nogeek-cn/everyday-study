@@ -88,13 +88,15 @@ public class IconAvatarUtils {
 
             // x 左右，y 上下
 //            fontGraphics.drawString("不止", 107, 320);
+            String drawContent = "不止";
             fontGraphics.drawString(
-                    "不止",
-                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth("不止")) / 2,
+                    drawContent,
+                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(drawContent)) / 2,
                     (imageHeight) / 2 - Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent() / 2
             );
-            fontGraphics.drawString("极客",
-                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth("极客")) / 2,
+            drawContent = "极客";
+            fontGraphics.drawString(drawContent,
+                    (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(drawContent)) / 2,
                     (imageHeight) / 2 + font.getSize() - Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent() / 2
             );
 //            System.out.println("Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent(): " + Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent());

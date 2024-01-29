@@ -65,6 +65,13 @@ public class ContractMain {
                         SELL_LIST.add(sellObject);
                         BUY_LIST.add(buyObject);
                     }
+                } else {
+                    if (Objects.nonNull(buyObject)) {
+                        BUY_LIST.add(buyObject);
+                    }
+                    if (Objects.nonNull(sellObject)) {
+                        SELL_LIST.add(sellObject);
+                    }
                 }
                 return false;
             }

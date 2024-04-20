@@ -24,7 +24,7 @@ public class IFVelocityDemo {
     private static VelocityEngine VELOCITY_ENGINE = new VelocityEngine();
 
     public static void main(String[] args) {
-        String template = "Hello #if($user.name=='Tom') [in] $user.name [in] #end, $user.name,  welcome to $you.name ’s $you.company. "
+        String template = "Hello #if($user.name=='Tom') [in] $user.name [in] [] #if($you.name == 'jerry') $you.company #end [] #end, $user.name,  welcome to $you.name ’s $you.company. "
                 + " $user.name and $you.name and $you.brother.name is a good friends. ";
         Map<String, String> user = new HashMap<>();
         user.put("name", "Tom");
@@ -40,6 +40,7 @@ public class IFVelocityDemo {
         params.put("user", user);
         params.put("you", you);
         String result = formatTemplateVelocity(template, params);
+        System.out.println();
         System.out.println(result); // Hello  [in] Tom [in] , Tom,  welcome to jerry ’s not Only geek club.  Tom and jerry and (jerry-brother-name) is a good friends.
         System.out.println();
 
@@ -47,6 +48,8 @@ public class IFVelocityDemo {
                 + " $user.name and $you.name and $you.brother.name is a good friends. ";
         result = formatTemplateVelocity(template, params);
         System.out.println(result); // Hello , Tom,  welcome to jerry ’s not Only geek club.  Tom and jerry and (jerry-brother-name) is a good friends.
+
+        System.out.println();
     }
 
     public static String formatTemplateVelocity(

@@ -70,7 +70,7 @@ public class OwnerPosterUtils {
 
 
         try {
-            boolean addUnsplashImg = false;
+            boolean addUnsplashImg = true;
 
             Font font = Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource(pingFangFileClassPath).getInputStream());
             BufferedImage bufferImage = ImageIO.read(new ClassPathResource(sourceFileClassPath).getInputStream());
@@ -109,14 +109,13 @@ public class OwnerPosterUtils {
             int y = fontSize * 5 / 2;
 
 
-
             if (addUnsplashImg) {
                 // https://source.unsplash.com/1280x600/?technology
 
                 RestTemplate restTemplate = new RestTemplate();
                 ResponseEntity<UnsplashImgResponse> forObject =
                         restTemplate.getForEntity("https://api.unsplash.com/photos/random/?client_id=hnk-fslShmHIGg8EE-IXCUVF25Bj9ubP6CIfFEIVb44"
-                                        + "&query=black,technology",
+                                        + "&query=compute, software, code",
 //                                + "&query=white,technology",
                                 UnsplashImgResponse.class);
                 System.out.println(forObject);
@@ -136,47 +135,52 @@ public class OwnerPosterUtils {
 
             List<String> printStringList = new ArrayList<>();
 
-            String otherMingYan = mingYan;
-            while (true) {
-                int spilt = 0;
-                for (int i = 1; i <= otherMingYan.length(); i++) {
+            String[] mingYanSplit = mingYan.split("\n");
 
-                    String beforeString = otherMingYan.substring(0, i);
-                    int beforeStringWidth = Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(beforeString);
-                    if (beforeStringWidth > wenZiWeight) {
-                        break;
+            for (String otherMingYan : mingYanSplit) {
+                otherMingYan = otherMingYan.trim();
+//                String otherMingYan = mingYan;
+                while (true) {
+                    int spilt = 0;
+                    for (int i = 1; i <= otherMingYan.length(); i++) {
+
+                        String beforeString = otherMingYan.substring(0, i);
+                        int beforeStringWidth = Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(beforeString);
+                        if (beforeStringWidth > wenZiWeight) {
+                            break;
+                        }
+                        spilt = i;
                     }
-                    spilt = i;
-                }
 
-                List<Character> notfirstList = FU_HAO_LIST;
-                while (spilt < otherMingYan.length()
-                        && notfirstList.contains(otherMingYan.charAt(spilt))) {
-                    spilt = spilt - 1;
-                }
-
-                while (spilt < otherMingYan.length()
-                        && spilt > 1) {
-                    Character per = otherMingYan.charAt(spilt - 1);
-                    Character next = otherMingYan.charAt(spilt);
-                    if (isEnglish(per) && isEnglish(next)) {
+                    List<Character> notfirstList = FU_HAO_LIST;
+                    while (spilt < otherMingYan.length()
+                            && notfirstList.contains(otherMingYan.charAt(spilt))) {
                         spilt = spilt - 1;
-                    } else {
+                    }
+
+                    while (spilt < otherMingYan.length()
+                            && spilt > 1) {
+                        Character per = otherMingYan.charAt(spilt - 1);
+                        Character next = otherMingYan.charAt(spilt);
+                        if (isEnglish(per) && isEnglish(next)) {
+                            spilt = spilt - 1;
+                        } else {
+                            break;
+                        }
+
+                    }
+
+                    printStringList.add(otherMingYan.substring(0, spilt));
+                    otherMingYan = otherMingYan.substring(spilt);
+
+
+                    int otherMingYanWeight = Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(otherMingYan);
+                    if (otherMingYanWeight <= wenZiWeight) {
+                        if (Objects.nonNull(otherMingYan) && otherMingYan.length() > 1) {
+                            printStringList.add(otherMingYan);
+                        }
                         break;
                     }
-
-                }
-
-                printStringList.add(otherMingYan.substring(0, spilt));
-                otherMingYan = otherMingYan.substring(spilt);
-
-
-                int otherMingYanWeight = Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(otherMingYan);
-                if (otherMingYanWeight <= wenZiWeight) {
-                    if (Objects.nonNull(otherMingYan) && otherMingYan.length() > 1) {
-                        printStringList.add(otherMingYan);
-                    }
-                    break;
                 }
             }
 
@@ -315,8 +319,17 @@ public class OwnerPosterUtils {
 
         mingYan = "事实，是独立于人的判断的客观存在。观点，是我们对一个事实的看法。立场，是被位置和利益影响的观点。信仰，是一套完全自洽的逻辑体系。当一个人“屁股决定脑袋”的时候，你应该做的事情，是对他说：it's good for you. 反过来，我们也要时刻反省自己。我说的话，我的表达，是事实，还是观点，还是立场，还是信仰？-- 刘润。      我觉得他说得对，是立场。";
         mingYan = "“架构师的个人哲学与认知先于架构师所谈的架构原则。”去年就看到了这句话，今天才有一点感悟。我们通常是看到了他怎么做事的，再说他是一个什么样的人。而这个人为什么要这么做事的根因因为他是一个什么样的人。“个人哲学与认知”就是“他是什么样的人”；“架构原则”=“怎么做事”。有的人喜欢稳定有的人喜欢折腾其实是不同的人的个人哲学与认知的外化表现。";
-        mingYan = "在每个案件里，你从不同的角度去看，可能都会得倒完全不同的所谓主观真相，你所代表的立场不同，你所追求的主观真相和结果自然也有所不同，而案件本身的客观真相，永远也无法复原，或者说：我们永远无法得知在过去的某个时空里，这个案件到底是如何发生的？每个诉讼参与人所做的，无非就是通过一系列的证据和说理，尽全力，无限逼近客观真相。亦或是，无限逼近那个我方苦苦追求所期望的与我方利益或立场相符的真相，而这个无限逼近真相近身肉搏的过程，我们一般称之为“诉讼”。在这个过程中，有着无数的不确定性，这也正是诉讼两个字本身最大的魅力。 --律师老韩";
-
+        mingYan = "在每个案件里，你从不同的角度去看，可能都会得到完全不同的所谓主观真相，你所代表的立场不同，你所追求的主观真相和结果自然也有所不同，而案件本身的客观真相，永远也无法复原，或者说：我们永远无法得知在过去的某个时空里，这个案件到底是如何发生的？每个诉讼参与人所做的，无非就是通过一系列的证据和说理，尽全力，无限逼近客观真相。亦或是，无限逼近那个我方苦苦追求所期望的与我方利益或立场相符的真相，而这个无限逼近真相近身肉搏的过程，我们一般称之为“诉讼”。在这个过程中，有着无数的不确定性，这也正是诉讼两个字本身最大的魅力。 \n  -- 律师老韩";
+        mingYan = "成年人的世界中，没有明确同意，就是不同意。 \n \n 这是潜规则，俗称成年人的必修课。";
+        mingYan = "重新回顾自己当初走上程序员的阴差阳错，被调剂专业的被迫选择。\n很多人只看了大学毕业生大厂高薪工作，那种难度跟考清华北大的难度差不多。\n\n 其实很多人不适合程序员。更别提现在程序员越来越严峻的 35 岁危机。\n 我做程序员就没那么顺心，原因就是自己不“狗”，上不能当老板的“舔狗”，下不能当咬死牛马的“猎狗”。 \n\n 如果从人的一生去看，选一个值得一生去深耕的行业，医生未必不是一个好的职业，越老越吃香。门槛高也是优势。";
+        mingYan = "        我的职业生涯就没那么顺心顺意，根本原因就是自己虽然“狼性足够”，但“狗性不足”，上不能当老板的“舔狗”，下不能当咬死牛马的“猎狗”。";
+        mingYan = "勿以身贵而贱人，\n勿以独见而违众，\n勿以辩说为必然。\n" +
+                "\n" +
+                "（《六韬·龙韬·立将》）";
+        mingYan = "本职工作没做完，回避自己的本职工作是自卑！" + "\n" +
+                "本质工作没做完，对别人的工作指指点点是自负！" + "\n" + "\n" +
+                "而职场中，自卑自负经常集于一身。"
+        ;
 
         String domainStaticPath = RESOURCES_PATH
                 + File.separator + "static"

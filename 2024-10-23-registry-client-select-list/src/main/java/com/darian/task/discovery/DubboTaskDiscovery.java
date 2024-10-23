@@ -4,11 +4,9 @@ import com.alibaba.cloud.nacos.discovery.NacosServiceDiscovery;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.darian.task.bean.TaskInstance;
 import org.apache.dubbo.common.utils.NetUtils;
-import org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.core.env.Environment;
 
 import java.util.Comparator;
 import java.util.List;

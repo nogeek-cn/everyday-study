@@ -1,0 +1,72 @@
+@startuml
+
+'skinparam dpi 10
+
+title: 基于注解驱动的 DDD 可视化编排框架
+
+Interface "协议入口" as 协议入口 <<抽象的协议>>{
+}
+class "@Controller" as Controller <<HTTP协议控制器>> {
+    - value Bean名称
+    - desc Bean描述
+}
+class "@MessageListenerProtocol" as MessageListenerProtocol <<消息消费者>> {
+    - value Bean名称
+    - desc Bean描述
+}
+class "@RemoteProviderProtocol" as RemoteProviderProtocol <<远程调用-提供者>> {
+    - value Bean名称
+    - desc Bean描述
+}
+class "@SchedulerProtocol" as SchedulerProtocol <<定时任务触发器>> {
+    - value Bean名称
+    - desc Bean描述
+}
+
+Controller -down-|> 协议入口 : 一种
+MessageListenerProtocol -down-|> 协议入口 : 一种
+RemoteProviderProtocol -down-|> 协议入口 : 一种
+SchedulerProtocol -down-|> 协议入口 : 一种
+
+class "<font color=red>@CoreUseCase" as CoreUseCase <<通用业务用例，负责应用的流程编排>> <<有的协议可以合并，有的协议不能合并>> <<基于维度思维进行编排>> {
+    - value Bean名称
+    - desc Bean描述
+}
+
+协议入口 -down-> CoreUseCase: 委派调用
+
+class "<font color=red>@Step" as Step <<业务中的某一个步骤>> {
+   - value Bean名称
+   - desc Bean描述
+}
+
+CoreUseCase -down-> Step: 组合很多个 Step 进而可以调用
+
+class "@Repository\n可选" as Repository <<数据存储层>>
+class "@BizConfig" as BizConfig <<XXX相关业务配置>> {
+    - value Bean名称
+    - desc Bean描述
+}
+class "@MessageSendProtocol" as MessageSendProtocol <<消息发送协议>> {
+    - value Bean名称
+    - desc Bean描述
+}
+class "@RemoteCallProtocol" as RemoteCallProtocol <<远程调用-调用者>> {
+    - value Bean名称
+    - desc Bean描述
+}
+
+Step -down-> Repository : 委派调用
+Step -down-> BizConfig : 委派调用
+Step -down-> MessageSendProtocol : 委派调用
+Step -down-> RemoteCallProtocol : 委派调用
+
+
+
+class "@Mapper" as Mapper <<Mapper转换层>>
+Repository -left-> Mapper
+Repository .left[hidden]. Mapper : xxxxxxxxxxxxxxxxxxx
+Step .down.> Mapper : <font color=red>如果没有 @Repository  ，那么直接依赖Mapper
+
+
+@enduml

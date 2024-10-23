@@ -1,0 +1,42 @@
+package com.darian.task.config;
+
+import com.alibaba.cloud.nacos.discovery.NacosServiceDiscovery;
+import com.darian.task.discovery.DubboTaskDiscovery;
+import com.darian.task.discovery.TaskDiscovery;
+import org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+
+import javax.annotation.Resource;
+import java.util.Objects;
+
+/***
+ *
+ *
+ * @author <a href="mailto:">notOnlyGeek</a>
+ * @date 2024/10/24  07:07
+ */
+@Configuration
+public class DistributedTaskConfig {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DistributedTaskConfig.class);
+
+    @Resource
+    private NacosServiceDiscovery nacosServiceDiscovery;
+    @Resource
+    private Environment environment;
+
+    @Bean
+    public TaskDiscovery taskDiscovery() {
+        String localInstanceServiceId = environment.getProperty("spring.application.name");
+        Integer localPortToBind = environment.getProperty("dubbo.protocol.port", Integer.class);
+        if (Objects.isNull(localPortToBind)) {
+            localPortToBind = DubboProtocol.DEFAULT_PORT;
+        }
+        DubboTaskDiscovery dubboTaskDiscovery = new DubboTaskDiscovery(nacosServiceDiscovery, localInstanceServiceId, localPortToBind);
+        LOGGER.info("[TaskDiscovery.localInstance][{}]", dubboTaskDiscovery.getLocalInstance());
+        return dubboTaskDiscovery;
+    }
+}

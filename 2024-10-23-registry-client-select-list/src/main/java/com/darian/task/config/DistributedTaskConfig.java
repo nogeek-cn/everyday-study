@@ -30,12 +30,7 @@ public class DistributedTaskConfig {
 
     @Bean
     public TaskDiscovery taskDiscovery() {
-        String localInstanceServiceId = environment.getProperty("spring.application.name");
-        Integer localPortToBind = environment.getProperty("dubbo.protocol.port", Integer.class);
-        if (Objects.isNull(localPortToBind)) {
-            localPortToBind = DubboProtocol.DEFAULT_PORT;
-        }
-        DubboTaskDiscovery dubboTaskDiscovery = new DubboTaskDiscovery(nacosServiceDiscovery, localInstanceServiceId, localPortToBind);
+        DubboTaskDiscovery dubboTaskDiscovery = new DubboTaskDiscovery(nacosServiceDiscovery, environment);
         LOGGER.info("[TaskDiscovery.localInstance][{}]", dubboTaskDiscovery.getLocalInstance());
         return dubboTaskDiscovery;
     }

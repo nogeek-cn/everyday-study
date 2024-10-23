@@ -4,9 +4,11 @@ import com.alibaba.cloud.nacos.discovery.NacosServiceDiscovery;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.darian.task.bean.TaskInstance;
 import org.apache.dubbo.common.utils.NetUtils;
+import org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.core.env.Environment;
 
 import java.util.Comparator;
 import java.util.List;
@@ -26,7 +28,12 @@ public class DubboTaskDiscovery implements TaskDiscovery {
     private final String localInstanceServiceId;
     private final Integer localPortToBind;
 
-    public DubboTaskDiscovery(NacosServiceDiscovery nacosServiceDiscovery, String localInstanceServiceId, Integer localPortToBind) {
+    public DubboTaskDiscovery(NacosServiceDiscovery nacosServiceDiscovery, Environment environment) {
+        String localInstanceServiceId = environment.getProperty("spring.application.name");
+        Integer localPortToBind = environment.getProperty("dubbo.protocol.port", Integer.class);
+        if (Objects.isNull(localPortToBind)) {
+            localPortToBind = DubboProtocol.DEFAULT_PORT;
+        }
         this.nacosServiceDiscovery = nacosServiceDiscovery;
         this.localInstanceServiceId = localInstanceServiceId;
         this.localPortToBind = localPortToBind;

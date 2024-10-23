@@ -3,7 +3,6 @@ package com.darian.task.config;
 import com.alibaba.cloud.nacos.discovery.NacosServiceDiscovery;
 import com.darian.task.discovery.DubboTaskDiscovery;
 import com.darian.task.discovery.TaskDiscovery;
-import org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.Resource;
-import java.util.Objects;
 
 /***
  *

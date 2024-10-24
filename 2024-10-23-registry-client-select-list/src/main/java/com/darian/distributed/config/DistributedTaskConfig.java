@@ -1,8 +1,8 @@
-package com.darian.task.config;
+package com.darian.distributed.config;
 
 import com.alibaba.cloud.nacos.discovery.NacosServiceDiscovery;
-import com.darian.task.discovery.DubboTaskDiscovery;
-import com.darian.task.discovery.TaskDiscovery;
+import com.darian.distributed.discovery.DubboTaskDiscovery;
+import com.darian.distributed.discovery.TaskDiscovery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;

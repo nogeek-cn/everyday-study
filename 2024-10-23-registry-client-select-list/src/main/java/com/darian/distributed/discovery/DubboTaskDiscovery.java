@@ -1,8 +1,8 @@
-package com.darian.task.discovery;
+package com.darian.distributed.discovery;
 
 import com.alibaba.cloud.nacos.discovery.NacosServiceDiscovery;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.darian.task.bean.TaskInstance;
+import com.darian.distributed.bean.TaskInstance;
 import org.apache.dubbo.common.utils.NetUtils;
 import org.apache.dubbo.rpc.protocol.dubbo.DubboProtocol;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package com.darian.task.bean;
+package com.darian.distributed.bean;
 
 import lombok.Data;
 

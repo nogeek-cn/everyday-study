@@ -1,6 +1,6 @@
-package com.darian.task.discovery;
+package com.darian.distributed.discovery;
 
-import com.darian.task.bean.TaskInstance;
+import com.darian.distributed.bean.TaskInstance;
 
 import java.util.List;
 

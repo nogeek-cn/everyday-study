@@ -1,8 +1,8 @@
-package com.darian.task.selector;
+package com.darian.distributed.selector;
 
 
-import com.darian.task.discovery.TaskDiscovery;
-import com.darian.task.bean.TaskInstance;
+import com.darian.distributed.discovery.TaskDiscovery;
+import com.darian.distributed.bean.TaskInstance;
 
 
 import org.springframework.stereotype.Component;
@@ -33,6 +33,10 @@ public class DistributedTaskInstanceSelector {
 
     public boolean isRunInCurrentByFirstStrategy() {
         return isRunInCurrent(0);
+    }
+
+    public TaskInstance selectServiceInstanceByFirstStrategy() {
+        return selectServiceInstance(0);
     }
 
     /**

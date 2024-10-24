@@ -21,58 +21,48 @@ import java.util.stream.Collectors;
  * @author <a href="mailto:">notOnlyGeek</a>
  * @date 2024/10/24  07:00
  */
-public class DubboTaskDiscovery implements TaskDiscovery {
+public class DubboTaskDiscovery extends AbstractTaskDiscovery {
     private static final Logger LOGGER = LoggerFactory.getLogger(DubboTaskDiscovery.class);
 
-    private final NacosServiceDiscovery nacosServiceDiscovery;
-    private final String localInstanceServiceId;
-    private final Integer localPortToBind;
 
     public DubboTaskDiscovery(NacosServiceDiscovery nacosServiceDiscovery, Environment environment) {
+        // 注册中心 serviceId
         String localInstanceServiceId = environment.getProperty("spring.application.name");
+        // 注册中心 注册实例 本地服务绑定的 IP
+        this.localInstanceBindHostSupplier = NetUtils::getLocalHost;
+        // 注册中心 注册实例 本地服务绑定的端口
         Integer localPortToBind = environment.getProperty("dubbo.protocol.port", Integer.class);
         if (Objects.isNull(localPortToBind)) {
             localPortToBind = DubboProtocol.DEFAULT_PORT;
         }
-        this.nacosServiceDiscovery = nacosServiceDiscovery;
-        this.localInstanceServiceId = localInstanceServiceId;
         this.localPortToBind = localPortToBind;
-    }
+        // 注册中心 注册实例 本地服务实例 方法
+        this.sortedTaskInstancesSupplier = () -> {
+            List<ServiceInstance> nacosInstances = null;
+            try {
+                nacosInstances = nacosServiceDiscovery.getInstances(localInstanceServiceId);
+            } catch (NacosException e) {
+                throw new RuntimeException(e);
+            }
 
-    @Override
-    public List<TaskInstance> getSortedTaskInstances(String serviceId) {
-        List<ServiceInstance> nacosInstances = null;
-        try {
-            nacosInstances = nacosServiceDiscovery.getInstances(serviceId);
-        } catch (NacosException e) {
-            throw new RuntimeException(e);
-        }
+            if (nacosInstances == null) {
+                return null;
+            }
 
-        if (nacosInstances == null) {
-            return null;
-        }
+            List<TaskInstance> taskInstanceList = nacosInstances.stream()
+                    .filter(Objects::nonNull)
+                    .filter(nacosInstance -> nacosInstance.getHost() != null)
+                    .map(nacosInstance ->
+                            new TaskInstance(nacosInstance.getHost(), nacosInstance.getPort()))
+                    .sorted(Comparator.comparing(TaskInstance::getHost)
+                            .thenComparing(TaskInstance::getPort))
+                    .collect(Collectors.toList());
+            LOGGER.info("taskInstanceList:{}", taskInstanceList);
+            return taskInstanceList;
+        };
 
-        List<TaskInstance> taskInstanceList = nacosInstances.stream()
-                .filter(Objects::nonNull)
-                .filter(nacosInstance -> nacosInstance.getHost() != null)
-                .map(nacosInstance ->
-                        new TaskInstance(nacosInstance.getHost(), nacosInstance.getPort()))
-                .sorted(Comparator.comparing(TaskInstance::getHost)
-                        .thenComparing(TaskInstance::getPort))
-                .collect(Collectors.toList());
-        LOGGER.info("taskInstanceList:{}", taskInstanceList);
-        return taskInstanceList;
-    }
 
-    @Override
-    public String getLocalInstanceServiceId() {
-        return localInstanceServiceId;
     }
 
 
-    @Override
-    public TaskInstance getLocalInstance() {
-        String localInstanceBindHost = NetUtils.getLocalHost();
-        return new TaskInstance(localInstanceBindHost, localPortToBind);
-    }
 }

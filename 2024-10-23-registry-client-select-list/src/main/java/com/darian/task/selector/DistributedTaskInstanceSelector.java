@@ -42,18 +42,17 @@ public class DistributedTaskInstanceSelector {
      * @return 是否要在当前实例执行
      */
     public boolean isRunInCurrent(int wheelIndex) {
-        // 本机注册 name
-        String currentServiceId = taskDiscovery.getLocalInstanceServiceId();
-
-        TaskInstance taskInstance = selectServiceInstance(currentServiceId, wheelIndex);
-
+        TaskInstance taskInstance = selectServiceInstance(wheelIndex);
         TaskInstance localTaskInstance = taskDiscovery.getLocalInstance();
         return localTaskInstance.equals(taskInstance);
     }
 
-    public TaskInstance selectServiceInstance(String serviceId, Integer wheelIndex) {
+    public TaskInstance selectServiceInstance(Integer wheelIndex) {
 
-        List<TaskInstance> sortedTaskInstances = taskDiscovery.getSortedTaskInstances(serviceId);
+        List<TaskInstance> sortedTaskInstances = taskDiscovery.getSortedTaskInstances();
+        if (sortedTaskInstances == null) {
+            return null;
+        }
 //        InetUtils
 
         // size = 1, index = 1, 0

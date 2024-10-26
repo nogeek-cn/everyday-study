@@ -26,7 +26,7 @@ public class IconAvatarUtils {
     /**
      * Java 测试图片叠加方法
      */
-    public static BufferedImage overlyingImageTest() {
+    private static BufferedImage overlyingImageTest(List<String> printStringList) {
 //        String domainStaticPath = System.getProperty("user.dir")
 //                + File.separator + "oss-center-application"
 //                + File.separator + "src"
@@ -75,10 +75,7 @@ public class IconAvatarUtils {
 //            fontGraphics.shear(0.1, -0.2);// 倾斜画布
             fontGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            List<String> printStringList = new ArrayList<>();
 
-            printStringList.add("不止");
-            printStringList.add("极客");
             LOGGER.debug("printStringList:" + printStringList);
 
 
@@ -88,13 +85,13 @@ public class IconAvatarUtils {
 
             // x 左右，y 上下
 //            fontGraphics.drawString("不止", 107, 320);
-            String drawContent = "不止";
+            String drawContent = printStringList.get(0);
             fontGraphics.drawString(
                     drawContent,
                     (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(drawContent)) / 2,
                     (imageHeight) / 2 - Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent() / 2
             );
-            drawContent = "极客";
+            drawContent = printStringList.get(1);
             fontGraphics.drawString(drawContent,
                     (imageWidth - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(drawContent)) / 2,
                     (imageHeight) / 2 + font.getSize() - Toolkit.getDefaultToolkit().getFontMetrics(font).getDescent() / 2
@@ -144,7 +141,7 @@ public class IconAvatarUtils {
      * @param buffImg  图像拼接叠加之后的BufferedImage对象
      * @param savePath 图像拼接叠加之后的保存路径
      */
-    public static void generateSaveFile(BufferedImage buffImg, String savePath) {
+    private static void generateSaveFile(BufferedImage buffImg, String savePath) {
         int temp = savePath.lastIndexOf(".") + 1;
         try {
             File outFile = new File(savePath);
@@ -159,7 +156,7 @@ public class IconAvatarUtils {
     }
 
 
-    public static void overlyingImageAndSaveTest() {
+    public static void overlyingImageAndSaveTest(List<String> printStringList ) {
         String domainStaticPath = System.getProperty("user.dir")
                 + File.separator + "src"
                 + File.separator + "main"
@@ -172,13 +169,20 @@ public class IconAvatarUtils {
                 + File.separator + "NotGeekAvatar.png";
         LOGGER.debug("saveFilePath: " + saveFilePath);
 
-        BufferedImage buffImg = overlyingImageTest();
+
+
+        BufferedImage buffImg = overlyingImageTest(printStringList);
         // 输出水印图片
         generateSaveFile(buffImg, saveFilePath);
     }
 
     public static void main(String[] args) {
-        overlyingImageAndSaveTest();
+        List<String> printStringList = new ArrayList<>();
+
+        printStringList.add("不止");
+        printStringList.add("极客");
+
+        overlyingImageAndSaveTest(printStringList);
     }
 
 }

@@ -6,6 +6,8 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /***
  *
@@ -13,10 +15,20 @@ import java.io.IOException;
  * @author <a href="mailto:1934849492@qq.com">Darian1996</a>
  * @date 2023/11/30  18:18
  */
-public class IconRoundUtils {
+public class IconAvatarRoundUtils {
 
     public static void main(String[] args) throws Exception {
+        List<String> printStringList = new ArrayList<>();
 
+        printStringList.add("不止");
+        printStringList.add("极客");
+
+        IconAvatarUtils.overlyingImageAndSaveTest(printStringList);
+
+        processorRoundUtils();
+    }
+
+    public static void processorRoundUtils() throws IOException {
         int cornerRadius = 150;
 
         String domainStaticPath = System.getProperty("user.dir")
@@ -33,7 +45,7 @@ public class IconRoundUtils {
         String outImageFile = domainStaticPath
                 + File.separator + "out"
                 + File.separator + "NotGeekAvatarRound.png";
-        String affix = srcImageFile.substring(srcImageFile.length()-3);
+        String affix = srcImageFile.substring(srcImageFile.length() - 3);
 
         BufferedImage bi1 = ImageIO.read(new File(srcImageFile));
 
@@ -54,7 +66,7 @@ public class IconRoundUtils {
         // 使用 setRenderingHint 设置抗锯齿
         g2 = image.createGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.fillRoundRect(0, 0,bi1.getWidth(), bi1.getHeight(), cornerRadius, cornerRadius);
+        g2.fillRoundRect(0, 0, bi1.getWidth(), bi1.getHeight(), cornerRadius, cornerRadius);
         g2.setComposite(AlphaComposite.SrcIn);
         g2.drawImage(bi1, 0, 0, bi1.getWidth(), bi1.getHeight(), null);
         g2.dispose();

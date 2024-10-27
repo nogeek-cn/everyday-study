@@ -1,6 +1,6 @@
 package com.darian;
 
-import com.darian.config.config.EnableDDDView;
+//import com.darian.config.config.EnableDDDView;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 
 import javax.annotation.Resource;
 
-@EnableDDDView
+//@EnableDDDView
 @SpringBootApplication
 @PropertySource("classpath:META-INF/spring/demo-context.properties")
 @ImportResource({"classpath:META-INF/spring/*.xml"})

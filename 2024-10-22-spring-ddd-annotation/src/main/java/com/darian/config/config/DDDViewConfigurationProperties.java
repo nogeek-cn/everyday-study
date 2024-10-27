@@ -23,8 +23,8 @@ public class DDDViewConfigurationProperties implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        if (level == null) {
-            throw new BeanCreationException("ddd.view.level must be not null");
-        }
+//        if (level == null) {
+//            throw new BeanCreationException("ddd.view.level must be not null");
+//        }
     }
 }

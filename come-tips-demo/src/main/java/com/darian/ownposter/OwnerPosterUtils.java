@@ -49,7 +49,7 @@ public class OwnerPosterUtils {
     /**
      * Java 测试图片叠加方法
      */
-    public static BufferedImage overlyingImageTest(String mingYan) {
+    public static BufferedImage overlyingImageTest(boolean addUnsplashImg, String mingYan) {
 
         /**
          * 注意-产品要求：
@@ -70,7 +70,7 @@ public class OwnerPosterUtils {
 
 
         try {
-            boolean addUnsplashImg = true;
+//            boolean addUnsplashImg = true;
 
             Font font = Font.createFont(Font.TRUETYPE_FONT, new ClassPathResource(pingFangFileClassPath).getInputStream());
             BufferedImage bufferImage = ImageIO.read(new ClassPathResource(sourceFileClassPath).getInputStream());
@@ -328,7 +328,16 @@ public class OwnerPosterUtils {
                 "（《六韬·龙韬·立将》）";
         mingYan = "本职工作没做完，回避自己的本职工作是自卑！" + "\n" +
                 "本质工作没做完，对别人的工作指指点点是自负！" + "\n" + "\n" +
-                "而职场中，自卑自负经常集于一身。"
+                "而职场中，自卑自负经常集于一身。";
+
+
+        mingYan = "\n\n 技术、产品、管理、商业" + "\n"+ "\n"+ "\n"+ "\n"
+                + "微码产品：https://mcode.net"+ "\n"
+                + "软件方法：https://umlcn.com"+ "\n"
+                + "不止极客：https://nogeek.cn"+ "\n";
+
+//        boolean addUnsplashImg = true;
+        boolean addUnsplashImg = false;
         ;
 
         String domainStaticPath = RESOURCES_PATH
@@ -340,7 +349,7 @@ public class OwnerPosterUtils {
                 + File.separator + "ownerposter.png";
         LOGGER.debug("saveFilePath: " + saveFilePath);
 
-        BufferedImage buffImg = overlyingImageTest(mingYan);
+        BufferedImage buffImg = overlyingImageTest(addUnsplashImg, mingYan);
         // 输出水印图片
         generateSaveFile(buffImg, saveFilePath);
 

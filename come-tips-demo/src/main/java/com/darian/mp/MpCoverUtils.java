@@ -1,4 +1,4 @@
-package com.darian.notgeekposter;
+package com.darian.mp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +17,13 @@ import java.io.IOException;
  * @author <a href="mailto:1934849492@qq.com">Darian1996</a>
  * @date 2024/1/16  22:41
  */
-public class BookCoverUtils {
-    private static Logger LOGGER = LoggerFactory.getLogger(BookCoverUtils.class);
+public class MpCoverUtils {
+    private static Logger LOGGER = LoggerFactory.getLogger(MpCoverUtils.class);
 
     /**
      * Java 测试图片叠加方法
      */
-    public static BufferedImage overlyingImageTest(String bookName, String author, String fontName) {
+    public static BufferedImage overlyingImageTest(String title, String subTitle, String author, String fontName) {
 
         /**
          * 注意-产品要求：
@@ -60,9 +60,9 @@ public class BookCoverUtils {
                     620, 350, new Color(255, 255, 255),
                     true);
 
-            int fontSize = resultImg.getWidth() / (bookName.length() + 1);
+            int titleFontSize = resultImg.getWidth() / (title.length() + 1);
             // 字体和字体大小
-            font = font.deriveFont(Font.PLAIN, fontSize);
+            font = font.deriveFont(Font.PLAIN, titleFontSize);
 
 
             fontGraphics.setPaint(fontGradientPaint);
@@ -70,18 +70,39 @@ public class BookCoverUtils {
             fontGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 
-            fontGraphics.drawString(bookName,
-                    (resultImg.getWidth() - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(bookName)) / 2,
-                    (resultImg.getHeight() + fontSize) / 2
+            int y = (resultImg.getHeight() + titleFontSize) / 2;
+            fontGraphics.drawString(title,
+                    (resultImg.getWidth() - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(title)) / 2,
+                    y
             );
 
-            fontSize = 50;
-            font = font.deriveFont(Font.PLAIN, fontSize);
+
+            int subTitleLength = subTitle.length();
+            if (subTitleLength <= 22) {
+                subTitleLength = 22;
+            }
+            int subTitleFontSize = resultImg.getWidth() / (subTitleLength + 2);
+            // 字体和字体大小
+            font = font.deriveFont(Font.PLAIN, subTitleFontSize);
+            fontGraphics.setFont(font);
+
+            y = y + titleFontSize + subTitleFontSize / 2;
+            System.out.println("resultImg.getWidth: " + resultImg.getWidth());
+            System.out.println("subTitle.stringWidth: " + Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(subTitle));
+            fontGraphics.drawString(subTitle,
+                    (resultImg.getWidth() - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(subTitle)) / 2,
+                    y
+            );
+
+
+            int authorFontSize = 50;
+            y = y + authorFontSize * 3;
+            font = font.deriveFont(Font.PLAIN, authorFontSize);
             fontGraphics.setFont(font);
 
             fontGraphics.drawString(author,
                     (resultImg.getWidth() - Toolkit.getDefaultToolkit().getFontMetrics(font).stringWidth(author)) / 2,
-                    (resultImg.getHeight() - fontSize * 3)
+                    y
             );
 
             return resultImg;
@@ -113,7 +134,7 @@ public class BookCoverUtils {
     }
 
 
-    public static void overlyingImageAndSaveTest(String bookName, String author, String fontName) {
+    public static void overlyingImageAndSaveTest(String title, String subTitle, String author, String fontName) {
 
 
         String domainStaticPath = System.getProperty("user.dir")
@@ -125,11 +146,11 @@ public class BookCoverUtils {
 
         String saveFilePath = domainStaticPath
                 + File.separator + "out"
-                + File.separator + "bookCover.png";
+                + File.separator + "wx_mp_Cover.png";
         LOGGER.debug("saveFilePath: " + saveFilePath);
 
 
-        BufferedImage buffImg = overlyingImageTest(bookName, author, fontName);
+        BufferedImage buffImg = overlyingImageTest(title, subTitle, author, fontName);
         // 输出水印图片
         generateSaveFile(buffImg, saveFilePath);
 
@@ -147,9 +168,10 @@ public class BookCoverUtils {
 
     public static void main(String[] args) {
 
-        String bookName = "淘宝订单号";
+        String title = "《天道》以弱胜强";
 //                bookName =  "技术产品商业";
-//        mingYan = "架构师的个人哲学与认知先于架构师所谈的架构原则";
+        String subTitle = "《毛选》、《天道》、微信，到底怎么样以弱胜强";
+
         String author = "不止极客";
 
         String fontName = null;
@@ -157,6 +179,6 @@ public class BookCoverUtils {
         fontName = "PingFangMedium.ttf";
         fontName = "SourceHanSansCN-Bold.ttf";
 
-        overlyingImageAndSaveTest(bookName, author, fontName);
+        overlyingImageAndSaveTest(title, subTitle, author, fontName);
     }
 }

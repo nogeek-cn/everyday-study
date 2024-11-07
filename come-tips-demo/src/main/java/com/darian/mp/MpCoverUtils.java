@@ -56,9 +56,16 @@ public class MpCoverUtils {
 
             // 设置字体的渐变色
             GradientPaint fontGradientPaint = new GradientPaint(
-                    20, 230, new Color(255, 255, 255),
-                    620, 350, new Color(255, 255, 255),
+                    0, 230, new Color(246, 170, 242),
+                    resultImg.getWidth(), 230, new Color(0, 251, 239),
                     true);
+
+
+            // 白色
+//            GradientPaint fontGradientPaint = new GradientPaint(
+//                    0, 230, new Color(255, 255, 255),
+//                    resultImg.getWidth(), 230, new Color(255, 255, 255),
+//                    true);
 
             int titleFontSize = resultImg.getWidth() / (title.length() + 1);
             // 字体和字体大小
@@ -168,9 +175,9 @@ public class MpCoverUtils {
 
     public static void main(String[] args) {
 
-        String title = "《天道》以弱胜强";
+        String title = "领导，你别哔哔了";
 //                bookName =  "技术产品商业";
-        String subTitle = "《毛选》、《天道》、微信，到底怎么样以弱胜强";
+        String subTitle = "你天天正事不干，秀什么优越感？下属都快烦死了！";
 
         String author = "不止极客";
 
